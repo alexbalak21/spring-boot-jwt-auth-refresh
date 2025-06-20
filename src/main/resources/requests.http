@@ -1,0 +1,62 @@
+#PowerShell command : [Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes("alex:password"))
+
+###GET ALL PRODUCTS
+GET http://localhost:8080/api/products
+#Base Authentication Header
+Authorization: Basic YWxleDpwYXNzd29yZA==
+Content-Type: application/json
+
+{}
+
+
+###GET PRODUCT BY ID
+GET http://localhost:8080/api/products/1
+Authorization: Basic YWxleDpwYXNzd29yZA==
+Content-Type: application/json
+
+###POST PRODUCT
+POST http://localhost:8080/api/products
+Authorization: Basic YWxleDpwYXNzd29yZA==
+Content-Type: application/json
+
+{
+  "name": "Product Created",
+  "price": "100.00"
+}
+
+
+###POST REGISTER USER
+POST http://localhost:8080/api/auth/register
+Content-type: application/json
+
+{
+  "fullName": "Alex Black",
+  "username": "alex",
+  "password": "password",
+  "role": "ROLE_ADMIN"
+}
+
+
+
+###GET ACCESS TOKEN & REFRESH TOKEN
+# @name login
+POST http://localhost:8080/api/auth/login
+Content-type: application/json
+
+{
+  "username": "alex",
+  "password": "password"
+}
+
+> {%
+    client.global.set("access_token", response.body.accessToken);
+    client.global.set("refresh_token", response.body.refreshToken);
+
+%}
+
+###GET ALL PRODUCTS
+GET http://localhost:8080/api/products
+Authorization: {{access_token}}
+Content-Type: application/json
+
+{}
