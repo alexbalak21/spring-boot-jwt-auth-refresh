@@ -54,6 +54,30 @@ Content-type: application/json
 
 %}
 
+
+###POST PRODUCT
+POST http://localhost:8080/api/products
+Authorization: {{access_token}}
+Content-Type: application/json
+
+{
+  "name": "Product 3",
+  "price": "300.00"
+}
+
+###POST PRODUCT
+POST http://localhost:8080/api/products
+Authorization: {{access_token}}
+Content-Type: application/json
+
+{
+  "name": "Product 3",
+  "price": "300.00"
+}
+
+
+
+
 ###GET ALL PRODUCTS
 GET http://localhost:8080/api/products
 Authorization: {{access_token}}
