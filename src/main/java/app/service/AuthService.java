@@ -4,6 +4,7 @@ package app.service;
 import app.dto.LoginRequest;
 import app.dto.RegisterRequest;
 import app.dto.TokenPair;
+import app.model.Role;
 import app.model.User;
 import app.repository.UserRepository;
 import jakarta.transaction.Transactional;
@@ -26,20 +27,18 @@ public class AuthService {
 
 
     @Transactional
-    public void register(RegisterRequest registerRequest) {
-        if (userRepository.existsByUsername(registerRequest.getUsername())) {
-            throw new IllegalStateException("User with username " + registerRequest.getUsername() + " already exists");
+    public User register(RegisterRequest request) {
+        if (userRepository.existsByUsername(request.getUsername())) {
+            throw new RuntimeException("Username is already taken");
         }
 
-        User user = User
-                .builder()
-                .username(registerRequest.getUsername())
-                .fullName(registerRequest.getFullName())
-                .password(passwordEncoder.encode(registerRequest.getPassword()))
-                .role(registerRequest.getRole())
-                .build();
+        User user = new User();
+        user.setUsername(request.getUsername());
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
+        user.setFullName(request.getFullName());
+        user.setRole(Role.valueOf(request.getRole().name()));
 
-        userRepository.save(user);
+        return userRepository.save(user);
     }
 
     public TokenPair login(LoginRequest loginRequest) {

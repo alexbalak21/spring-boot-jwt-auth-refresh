@@ -3,6 +3,8 @@ package app.controller;
 import app.dto.LoginRequest;
 import app.dto.RegisterRequest;
 import app.dto.TokenPair;
+import app.dto.UserResponse;
+import app.model.User;
 import app.service.AuthService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -21,8 +23,8 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@Valid @RequestBody RegisterRequest request) {
-        authService.register(request);
-        return ResponseEntity.ok("User registered successfully");
+        User registeredUser = authService.register(request);
+        return ResponseEntity.ok(UserResponse.fromUser(registeredUser));
     }
 
     @PostMapping("/login")

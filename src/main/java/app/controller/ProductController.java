@@ -9,6 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/api/products")
 @RequiredArgsConstructor
@@ -46,9 +49,16 @@ public class ProductController {
 
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<?> deleteProduct(@PathVariable Long id) {
+    public ResponseEntity<Map<String, Object>> deleteProduct(@PathVariable Long id) {
+        Product productToDelete = productService.getProductById(id)
+                .orElseThrow(() -> new RuntimeException("Product not found with id: " + id));
         productService.deleteProduct(id);
-        return ResponseEntity.ok().build();
+        Map<String, Object> response = new HashMap<>();
+        response.put("status", "success");
+        response.put("message", "Product deleted successfully");
+        response.put("deletedProduct", productToDelete);  // Added key "deletedProduct"
+
+        return ResponseEntity.ok(response);
     }
 
 
