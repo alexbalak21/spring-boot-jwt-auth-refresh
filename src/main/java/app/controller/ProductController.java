@@ -5,9 +5,11 @@ import app.model.Product;
 import app.service.ProductService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -51,12 +53,17 @@ public class ProductController {
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Map<String, Object>> deleteProduct(@PathVariable Long id) {
         Product productToDelete = productService.getProductById(id)
-                .orElseThrow(() -> new RuntimeException("Product not found with id: " + id));
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "Product not found with id: " + id
+                ));
+
         productService.deleteProduct(id);
+
         Map<String, Object> response = new HashMap<>();
         response.put("status", "success");
         response.put("message", "Product deleted successfully");
-        response.put("deletedProduct", productToDelete);  // Added key "deletedProduct"
+        response.put("deletedProduct", productToDelete);
 
         return ResponseEntity.ok(response);
     }
