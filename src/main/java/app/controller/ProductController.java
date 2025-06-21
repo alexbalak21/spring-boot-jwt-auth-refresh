@@ -1,5 +1,6 @@
 package app.controller;
 
+import app.dto.ProductDto;
 import app.model.Product;
 import app.service.ProductService;
 import jakarta.validation.Valid;
@@ -33,7 +34,13 @@ public class ProductController {
 
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public ResponseEntity<?> updateProduct(@PathVariable Long id, @Valid @RequestBody Product product) {
+    public ResponseEntity<?> updateProduct(@PathVariable Long id, @Valid @RequestBody ProductDto productDto) {  // Changed parameter name to productDto
+        if (productService.getProductById(id).isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        Product product = productService.getProductById(id).get();
+        product.setName(productDto.getName());
+        product.setPrice(productDto.getPrice());
         return ResponseEntity.ok(productService.saveProduct(product));
     }
 

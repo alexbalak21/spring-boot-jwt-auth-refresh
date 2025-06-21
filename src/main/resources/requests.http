@@ -25,6 +25,8 @@ Content-Type: application/json
 }
 
 
+
+
 ###POST REGISTER USER
 POST http://localhost:8080/api/auth/register
 Content-type: application/json
@@ -61,8 +63,8 @@ Authorization: {{access_token}}
 Content-Type: application/json
 
 {
-  "name": "Product 3",
-  "price": "300.00"
+  "name": "Product 1",
+  "price": "100.00"
 }
 
 ###POST PRODUCT
@@ -71,11 +73,30 @@ Authorization: {{access_token}}
 Content-Type: application/json
 
 {
-  "name": "Product 3",
-  "price": "300.00"
+  "name": "Product 2",
+  "price": "200.00"
 }
 
 
+###UPDATE PRODUCT
+PUT http://localhost:8080/api/products/1
+Authorization: {{access_token}}
+Content-Type: application/json
+
+{
+  "name": "Product 1 Updated",
+  "price": "150.00"
+}
+
+###UPDATE PRODUCT
+PUT http://localhost:8080/api/products/2
+Authorization: {{access_token}}
+Content-Type: application/json
+
+{
+  "name": "Product 2 Updated",
+  "price": "250.00"
+}
 
 
 ###GET ALL PRODUCTS
