@@ -1,131 +1,37 @@
-2025-06-22T11:52:30.490+02:00  INFO 10236 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-06-22T11:52:30.492+02:00  INFO 10236 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2025-06-22T11:52:30.495+02:00  INFO 10236 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
-2025-06-22T11:52:30.544+02:00 DEBUG 10236 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing POST /api/auth/login
-2025-06-22T11:52:30.564+02:00  INFO 10236 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-1] app.filter.RequestLoggingFilter          : Request URL: POST http://localhost:8080/api/auth/login
-2025-06-22T11:52:30.564+02:00  INFO 10236 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-1] app.filter.RequestLoggingFilter          : Content-Type: application/json
-2025-06-22T11:52:30.565+02:00  INFO 10236 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-1] app.filter.RequestLoggingFilter          : Content-Length: 53
-2025-06-22T11:52:30.570+02:00 DEBUG 10236 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-1] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
-2025-06-22T11:52:30.571+02:00 DEBUG 10236 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-1] o.s.s.w.session.SessionManagementFilter  : Request requested invalid session id 3707F987AF2E25021EB804BDF1FBE0A9
-2025-06-22T11:52:30.576+02:00 DEBUG 10236 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Secured POST /api/auth/login
-2025-06-22T11:52:30.701+02:00  INFO 10236 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-1] app.controller.AuthController            : Raw login request received: {username=alex, password=password123}
-2025-06-22T11:52:30.703+02:00  INFO 10236 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-1] app.controller.AuthController            : Attempting login for user: 'alex'
-2025-06-22T11:52:30.721+02:00  INFO 10236 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-1] app.service.AuthService                  : Attempting to authenticate user: 'alex'
-2025-06-22T11:52:30.867+02:00  INFO 10236 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-1] app.service.CustomUserDetailsService     : Attempting to load user by username: alex
-2025-06-22T11:52:30.887+02:00 DEBUG 10236 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-1] app.repository.UserRepository            : Searching for user by username: alex
-2025-06-22T11:52:31.343+02:00 DEBUG 10236 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-1] org.hibernate.SQL                        : 
-    select
-        u1_0.id,
-        u1_0.created_at,
-        u1_0.full_name,
-        u1_0.password,
-        u1_0.role,
-        u1_0.updated_at,
-        u1_0.username 
-    from
-        users u1_0 
-    where
-        u1_0.username=?
-2025-06-22T11:52:31.433+02:00 DEBUG 10236 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-1] app.repository.UserRepository            : User found by username 'alex': no
-2025-06-22T11:52:31.434+02:00  WARN 10236 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-1] app.service.CustomUserDetailsService     : User not found with username: alex
-2025-06-22T11:52:31.571+02:00 DEBUG 10236 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-1] o.s.s.a.dao.DaoAuthenticationProvider    : Failed to find user 'alex'
-2025-06-22T11:52:31.577+02:00 DEBUG 10236 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-1] o.s.s.authentication.ProviderManager     : Authentication failed with provider DaoAuthenticationProvider since Bad credentials
-2025-06-22T11:52:31.578+02:00 ERROR 10236 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-1] app.service.AuthService                  : Authentication failed for user 'alex': Bad credentials
-2025-06-22T11:52:31.580+02:00 ERROR 10236 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-1] app.controller.AuthController            : Login failed for user 'alex': Bad credentials
-2025-06-22T11:52:31.667+02:00  INFO 10236 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-1] app.filter.RequestLoggingFilter          : Request payload: {
-  "username": "alex",
-  "password": "password123"
-}
-2025-06-22T11:52:42.005+02:00 DEBUG 10236 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing POST /api/auth/register
-2025-06-22T11:52:42.007+02:00 DEBUG 10236 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-2] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
-2025-06-22T11:52:42.007+02:00 DEBUG 10236 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-2] o.s.s.w.session.SessionManagementFilter  : Request requested invalid session id 3707F987AF2E25021EB804BDF1FBE0A9
-2025-06-22T11:52:42.008+02:00 DEBUG 10236 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Secured POST /api/auth/register
-2025-06-22T11:52:42.699+02:00  INFO 10236 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-2] app.service.AuthService                  : Registering new user with username: alex
-2025-06-22T11:52:42.701+02:00 DEBUG 10236 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-2] app.repository.UserRepository            : Checking if user exists with username: alex
-2025-06-22T11:52:42.736+02:00 DEBUG 10236 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-2] org.hibernate.SQL                        : 
-    select
-        u1_0.id 
-    from
-        users u1_0 
-    where
-        upper(u1_0.username)=upper(?) 
-    limit
-        ?
-2025-06-22T11:52:42.760+02:00 DEBUG 10236 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-2] app.repository.UserRepository            : User with username 'alex' exists: false
-2025-06-22T11:52:43.072+02:00 DEBUG 10236 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-2] org.hibernate.SQL                        : 
-    insert 
-    into
-        users
-        (created_at, full_name, password, role, updated_at, username) 
-    values
-        (?, ?, ?, ?, ?, ?)
-2025-06-22T11:52:43.130+02:00  INFO 10236 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-2] app.service.AuthService                  : Successfully registered user: alex with role: ROLE_ADMIN
-2025-06-22T11:52:46.260+02:00 DEBUG 10236 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing POST /api/auth/login
-2025-06-22T11:52:46.261+02:00  INFO 10236 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-3] app.filter.RequestLoggingFilter          : Request URL: POST http://localhost:8080/api/auth/login
-2025-06-22T11:52:46.261+02:00  INFO 10236 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-3] app.filter.RequestLoggingFilter          : Content-Type: application/json
-2025-06-22T11:52:46.261+02:00  INFO 10236 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-3] app.filter.RequestLoggingFilter          : Content-Length: 53
-2025-06-22T11:52:46.262+02:00 DEBUG 10236 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-3] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
-2025-06-22T11:52:46.262+02:00 DEBUG 10236 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-3] o.s.s.w.session.SessionManagementFilter  : Request requested invalid session id 3707F987AF2E25021EB804BDF1FBE0A9
-2025-06-22T11:52:46.262+02:00 DEBUG 10236 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Secured POST /api/auth/login
-2025-06-22T11:52:46.265+02:00  INFO 10236 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-3] app.controller.AuthController            : Raw login request received: {username=alex, password=password123}
-2025-06-22T11:52:46.265+02:00  INFO 10236 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-3] app.controller.AuthController            : Attempting login for user: 'alex'
-2025-06-22T11:52:46.266+02:00  INFO 10236 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-3] app.service.AuthService                  : Attempting to authenticate user: 'alex'
-2025-06-22T11:52:46.266+02:00  INFO 10236 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-3] app.service.CustomUserDetailsService     : Attempting to load user by username: alex
-2025-06-22T11:52:46.266+02:00 DEBUG 10236 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-3] app.repository.UserRepository            : Searching for user by username: alex
-2025-06-22T11:52:46.270+02:00 DEBUG 10236 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-3] org.hibernate.SQL                        : 
-    select
-        u1_0.id,
-        u1_0.created_at,
-        u1_0.full_name,
-        u1_0.password,
-        u1_0.role,
-        u1_0.updated_at,
-        u1_0.username 
-    from
-        users u1_0 
-    where
-        u1_0.username=?
-2025-06-22T11:52:46.282+02:00 DEBUG 10236 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-3] app.repository.UserRepository            : User found by username 'alex': yes
-2025-06-22T11:52:46.283+02:00 DEBUG 10236 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-3] app.service.CustomUserDetailsService     : Found user: alex with role: ROLE_ADMIN
-2025-06-22T11:52:46.420+02:00 DEBUG 10236 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-3] o.s.s.a.dao.DaoAuthenticationProvider    : Authenticated user
-2025-06-22T11:52:46.421+02:00  INFO 10236 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-3] app.service.AuthService                  : Authentication successful for user: 'alex'
-2025-06-22T11:52:46.666+02:00 DEBUG 10236 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-3] app.service.JwtService                   : Generated token pair for user 'alex'
-2025-06-22T11:52:46.666+02:00  INFO 10236 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-3] app.controller.AuthController            : Login successful for user: 'alex'
-2025-06-22T11:52:46.672+02:00  INFO 10236 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-3] app.filter.RequestLoggingFilter          : Request payload: {
-  "username": "alex",
-  "password": "password123"
-}
-2025-06-22T11:53:46.963+02:00  INFO 10236 --- [spring-boot-jwt-auth-refresh] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
-2025-06-22T11:53:46.974+02:00  INFO 10236 --- [spring-boot-jwt-auth-refresh] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
-2025-06-22T11:53:46.983+02:00  INFO 10236 --- [spring-boot-jwt-auth-refresh] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2025-06-22T11:53:46.985+02:00 DEBUG 10236 --- [spring-boot-jwt-auth-refresh] [SpringApplicationShutdownHook] org.hibernate.SQL                        : 
-    drop table if exists products
-2025-06-22T11:53:46.992+02:00 DEBUG 10236 --- [spring-boot-jwt-auth-refresh] [SpringApplicationShutdownHook] org.hibernate.SQL                        : 
-    drop table if exists products_seq
-2025-06-22T11:53:47.001+02:00 DEBUG 10236 --- [spring-boot-jwt-auth-refresh] [SpringApplicationShutdownHook] org.hibernate.SQL                        : 
-    drop table if exists users
-2025-06-22T11:53:47.018+02:00  INFO 10236 --- [spring-boot-jwt-auth-refresh] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2025-06-22T11:53:47.034+02:00  INFO 10236 --- [spring-boot-jwt-auth-refresh] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-2025-06-22T11:53:55.805+02:00  INFO 15612 --- [spring-boot-jwt-auth-refresh] [main] app.Application                          : Starting Application using Java 24.0.1 with PID 15612 (C:\DEV\spring-boot-jwt-auth-refresh\target\classes started by ALEX in C:\DEV\spring-boot-jwt-auth-refresh)
-2025-06-22T11:53:55.810+02:00 DEBUG 15612 --- [spring-boot-jwt-auth-refresh] [main] app.Application                          : Running with Spring Boot v3.5.3, Spring v6.2.8
-2025-06-22T11:53:55.811+02:00  INFO 15612 --- [spring-boot-jwt-auth-refresh] [main] app.Application                          : The following 1 profile is active: "dev"
-2025-06-22T11:53:58.522+02:00  INFO 15612 --- [spring-boot-jwt-auth-refresh] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-06-22T11:53:58.745+02:00  INFO 15612 --- [spring-boot-jwt-auth-refresh] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 178 ms. Found 2 JPA repository interfaces.
-2025-06-22T11:54:00.843+02:00  INFO 15612 --- [spring-boot-jwt-auth-refresh] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
-2025-06-22T11:54:00.884+02:00  INFO 15612 --- [spring-boot-jwt-auth-refresh] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2025-06-22T11:54:00.886+02:00  INFO 15612 --- [spring-boot-jwt-auth-refresh] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.42]
-2025-06-22T11:54:01.021+02:00  INFO 15612 --- [spring-boot-jwt-auth-refresh] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2025-06-22T11:54:01.022+02:00  INFO 15612 --- [spring-boot-jwt-auth-refresh] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 5070 ms
-2025-06-22T11:54:01.461+02:00  INFO 15612 --- [spring-boot-jwt-auth-refresh] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-06-22T11:54:01.622+02:00  INFO 15612 --- [spring-boot-jwt-auth-refresh] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.18.Final
-2025-06-22T11:54:01.755+02:00  INFO 15612 --- [spring-boot-jwt-auth-refresh] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2025-06-22T11:54:02.486+02:00  INFO 15612 --- [spring-boot-jwt-auth-refresh] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-06-22T11:54:02.564+02:00  INFO 15612 --- [spring-boot-jwt-auth-refresh] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2025-06-22T11:54:02.949+02:00  INFO 15612 --- [spring-boot-jwt-auth-refresh] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@311a0b3e
-2025-06-22T11:54:02.953+02:00  INFO 15612 --- [spring-boot-jwt-auth-refresh] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2025-06-22T11:54:02.998+02:00  WARN 15612 --- [spring-boot-jwt-auth-refresh] [main] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-06-22T11:54:03.000+02:00  WARN 15612 --- [spring-boot-jwt-auth-refresh] [main] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-06-22T11:54:03.034+02:00  INFO 15612 --- [spring-boot-jwt-auth-refresh] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+2025-06-21 13:20:00 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-06-21 13:20:00 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-06-21 13:20:00 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 4 ms
+2025-06-21 13:20:00 [http-nio-8080-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing POST /api/auth/login
+2025-06-21 13:20:01 [http-nio-8080-exec-1] DEBUG o.s.s.a.d.DaoAuthenticationProvider - Failed to find user ''
+2025-06-21 13:20:01 [http-nio-8080-exec-1] DEBUG o.s.s.authentication.ProviderManager - Authentication failed with provider DaoAuthenticationProvider since Bad credentials
+2025-06-21 13:20:01 [http-nio-8080-exec-1] DEBUG o.s.s.a.d.DaoAuthenticationProvider - Failed to find user ''
+2025-06-21 13:20:01 [http-nio-8080-exec-1] DEBUG o.s.s.authentication.ProviderManager - Authentication failed with provider DaoAuthenticationProvider since Bad credentials
+2025-06-21 13:20:01 [http-nio-8080-exec-1] DEBUG o.s.s.authentication.ProviderManager - Denying authentication since all attempted providers failed
+2025-06-21 13:22:18 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-06-21 13:22:18 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-06-21 13:22:18 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-06-21 13:22:18 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-06-21 13:22:18 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-06-22 21:47:52 [main] INFO  app.Application - Starting Application using Java 24.0.1 with PID 776 (C:\DEV\spring-boot-jwt-auth-refresh\target\classes started by ALEX in C:\DEV\spring-boot-jwt-auth-refresh)
+2025-06-22 21:47:52 [main] DEBUG app.Application - Running with Spring Boot v3.5.3, Spring v6.2.8
+2025-06-22 21:47:52 [main] INFO  app.Application - The following 1 profile is active: "dev"
+2025-06-22 21:47:54 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-06-22 21:47:54 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 169 ms. Found 2 JPA repository interfaces.
+2025-06-22 21:47:56 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-06-22 21:47:56 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-06-22 21:47:56 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.42]
+2025-06-22 21:47:56 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-06-22 21:47:56 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 4390 ms
+2025-06-22 21:47:57 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-06-22 21:47:57 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.18.Final
+2025-06-22 21:47:58 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-06-22 21:47:59 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-06-22 21:47:59 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-06-22 21:47:59 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@7db791df
+2025-06-22 21:47:59 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-06-22 21:47:59 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-06-22 21:47:59 [main] WARN  org.hibernate.orm.deprecation - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-06-22 21:47:59 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
 	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
 	Database driver: undefined/unknown
 	Database version: 8.0
@@ -133,116 +39,38 @@
 	Isolation level: undefined/unknown
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-2025-06-22T11:54:04.970+02:00  INFO 15612 --- [spring-boot-jwt-auth-refresh] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-06-22T11:54:05.004+02:00 DEBUG 15612 --- [spring-boot-jwt-auth-refresh] [main] org.hibernate.SQL                        : 
-    drop table if exists products
-2025-06-22T11:54:06.007+02:00 DEBUG 15612 --- [spring-boot-jwt-auth-refresh] [main] org.hibernate.SQL                        : 
-    drop table if exists products_seq
-2025-06-22T11:54:06.012+02:00 DEBUG 15612 --- [spring-boot-jwt-auth-refresh] [main] org.hibernate.SQL                        : 
-    drop table if exists users
-2025-06-22T11:54:06.024+02:00 DEBUG 15612 --- [spring-boot-jwt-auth-refresh] [main] org.hibernate.SQL                        : 
-    create table products (
-        price decimal(38,2) not null,
-        id bigint not null,
-        name varchar(255) not null,
-        primary key (id)
-    ) engine=InnoDB
-2025-06-22T11:54:06.041+02:00 DEBUG 15612 --- [spring-boot-jwt-auth-refresh] [main] org.hibernate.SQL                        : 
-    create table products_seq (
-        next_val bigint
-    ) engine=InnoDB
-2025-06-22T11:54:06.057+02:00 DEBUG 15612 --- [spring-boot-jwt-auth-refresh] [main] org.hibernate.SQL                        : 
-    insert into products_seq values ( 1 )
-2025-06-22T11:54:06.064+02:00 DEBUG 15612 --- [spring-boot-jwt-auth-refresh] [main] org.hibernate.SQL                        : 
-    create table users (
-        created_at datetime(6),
-        id bigint not null auto_increment,
-        updated_at datetime(6),
-        full_name varchar(50) not null,
-        username varchar(50) not null,
-        password varchar(255) not null,
-        role enum ('ROLE_ADMIN','ROLE_USER') not null,
-        primary key (id)
-    ) engine=InnoDB
-2025-06-22T11:54:06.078+02:00 DEBUG 15612 --- [spring-boot-jwt-auth-refresh] [main] org.hibernate.SQL                        : 
-    alter table users 
-       add constraint UKr43af9ap4edm43mmtq01oddj6 unique (username)
-2025-06-22T11:54:06.101+02:00  INFO 15612 --- [spring-boot-jwt-auth-refresh] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-06-22T11:54:06.902+02:00 DEBUG 15612 --- [spring-boot-jwt-auth-refresh] [main] app.filter.JwtAuthenticationFilter       : Filter 'jwtAuthenticationFilter' configured for use
-2025-06-22T11:54:06.903+02:00 DEBUG 15612 --- [spring-boot-jwt-auth-refresh] [main] app.filter.RequestLoggingFilter          : Filter 'requestLoggingFilter' configured for use
-2025-06-22T11:54:07.062+02:00  INFO 15612 --- [spring-boot-jwt-auth-refresh] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
-2025-06-22T11:54:08.033+02:00 DEBUG 15612 --- [spring-boot-jwt-auth-refresh] [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, LogoutFilter, RequestLoggingFilter, JwtAuthenticationFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
-2025-06-22T11:54:08.764+02:00  INFO 15612 --- [spring-boot-jwt-auth-refresh] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
-2025-06-22T11:54:08.780+02:00  INFO 15612 --- [spring-boot-jwt-auth-refresh] [main] app.Application                          : Started Application in 14.192 seconds (process running for 16.125)
-2025-06-22T11:54:13.808+02:00  INFO 15612 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-06-22T11:54:13.810+02:00  INFO 15612 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2025-06-22T11:54:13.822+02:00  INFO 15612 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
-2025-06-22T11:54:13.884+02:00 DEBUG 15612 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing POST /api/auth/login
-2025-06-22T11:54:13.910+02:00  INFO 15612 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-1] app.filter.RequestLoggingFilter          : Request URL: POST http://localhost:8080/api/auth/login
-2025-06-22T11:54:13.911+02:00  INFO 15612 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-1] app.filter.RequestLoggingFilter          : Content-Type: application/json
-2025-06-22T11:54:13.913+02:00  INFO 15612 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-1] app.filter.RequestLoggingFilter          : Content-Length: 53
-2025-06-22T11:54:13.924+02:00 DEBUG 15612 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-1] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
-2025-06-22T11:54:13.926+02:00 DEBUG 15612 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-1] o.s.s.w.session.SessionManagementFilter  : Request requested invalid session id 3707F987AF2E25021EB804BDF1FBE0A9
-2025-06-22T11:54:13.931+02:00 DEBUG 15612 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Secured POST /api/auth/login
-2025-06-22T11:54:14.108+02:00  INFO 15612 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-1] app.controller.AuthController            : Raw login request received: {username=alex, password=password123}
-2025-06-22T11:54:14.108+02:00  INFO 15612 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-1] app.controller.AuthController            : Attempting login for user: 'alex'
-2025-06-22T11:54:14.108+02:00  INFO 15612 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-1] app.service.AuthService                  : Attempting to authenticate user: 'alex'
-2025-06-22T11:54:14.253+02:00  INFO 15612 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-1] app.service.CustomUserDetailsService     : Attempting to load user by username: alex
-2025-06-22T11:54:14.264+02:00 DEBUG 15612 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-1] app.repository.UserRepository            : Searching for user by username: alex
-2025-06-22T11:54:14.550+02:00 DEBUG 15612 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-1] org.hibernate.SQL                        : 
-    select
-        u1_0.id,
-        u1_0.created_at,
-        u1_0.full_name,
-        u1_0.password,
-        u1_0.role,
-        u1_0.updated_at,
-        u1_0.username 
-    from
-        users u1_0 
-    where
-        u1_0.username=?
-2025-06-22T11:54:14.633+02:00 DEBUG 15612 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-1] app.repository.UserRepository            : User found by username 'alex': no
-2025-06-22T11:54:14.635+02:00  WARN 15612 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-1] app.service.CustomUserDetailsService     : User not found with username: alex
-2025-06-22T11:54:14.777+02:00 DEBUG 15612 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-1] o.s.s.a.dao.DaoAuthenticationProvider    : Failed to find user 'alex'
-2025-06-22T11:54:14.782+02:00 DEBUG 15612 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-1] o.s.s.authentication.ProviderManager     : Authentication failed with provider DaoAuthenticationProvider since Bad credentials
-2025-06-22T11:54:14.784+02:00 ERROR 15612 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-1] app.service.AuthService                  : Authentication failed for user 'alex': Bad credentials
-2025-06-22T11:54:14.784+02:00 ERROR 15612 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-1] app.controller.AuthController            : Login failed for user 'alex': Bad credentials
-2025-06-22T11:54:14.867+02:00  INFO 15612 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-1] app.filter.RequestLoggingFilter          : Request payload: {
-  "username": "alex",
-  "password": "password123"
-}
-2025-06-22T11:57:05.181+02:00  INFO 15612 --- [spring-boot-jwt-auth-refresh] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
-2025-06-22T11:57:05.240+02:00  INFO 15612 --- [spring-boot-jwt-auth-refresh] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
-2025-06-22T11:57:05.441+02:00  INFO 15612 --- [spring-boot-jwt-auth-refresh] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2025-06-22T11:57:05.444+02:00 DEBUG 15612 --- [spring-boot-jwt-auth-refresh] [SpringApplicationShutdownHook] org.hibernate.SQL                        : 
-    drop table if exists products
-2025-06-22T11:57:05.511+02:00 DEBUG 15612 --- [spring-boot-jwt-auth-refresh] [SpringApplicationShutdownHook] org.hibernate.SQL                        : 
-    drop table if exists products_seq
-2025-06-22T11:57:05.520+02:00 DEBUG 15612 --- [spring-boot-jwt-auth-refresh] [SpringApplicationShutdownHook] org.hibernate.SQL                        : 
-    drop table if exists users
-2025-06-22T11:57:05.535+02:00  INFO 15612 --- [spring-boot-jwt-auth-refresh] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2025-06-22T11:57:05.561+02:00  INFO 15612 --- [spring-boot-jwt-auth-refresh] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-2025-06-22T11:57:19.865+02:00  INFO 6292 --- [spring-boot-jwt-auth-refresh] [main] app.Application                          : Starting Application using Java 24.0.1 with PID 6292 (C:\DEV\spring-boot-jwt-auth-refresh\target\classes started by ALEX in C:\DEV\spring-boot-jwt-auth-refresh)
-2025-06-22T11:57:19.870+02:00 DEBUG 6292 --- [spring-boot-jwt-auth-refresh] [main] app.Application                          : Running with Spring Boot v3.5.3, Spring v6.2.8
-2025-06-22T11:57:19.871+02:00  INFO 6292 --- [spring-boot-jwt-auth-refresh] [main] app.Application                          : The following 1 profile is active: "dev"
-2025-06-22T11:57:21.802+02:00  INFO 6292 --- [spring-boot-jwt-auth-refresh] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-06-22T11:57:21.974+02:00  INFO 6292 --- [spring-boot-jwt-auth-refresh] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 143 ms. Found 2 JPA repository interfaces.
-2025-06-22T11:57:23.244+02:00  INFO 6292 --- [spring-boot-jwt-auth-refresh] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
-2025-06-22T11:57:23.279+02:00  INFO 6292 --- [spring-boot-jwt-auth-refresh] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2025-06-22T11:57:23.280+02:00  INFO 6292 --- [spring-boot-jwt-auth-refresh] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.42]
-2025-06-22T11:57:23.453+02:00  INFO 6292 --- [spring-boot-jwt-auth-refresh] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2025-06-22T11:57:23.455+02:00  INFO 6292 --- [spring-boot-jwt-auth-refresh] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3448 ms
-2025-06-22T11:57:23.933+02:00  INFO 6292 --- [spring-boot-jwt-auth-refresh] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-06-22T11:57:24.113+02:00  INFO 6292 --- [spring-boot-jwt-auth-refresh] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.18.Final
-2025-06-22T11:57:24.243+02:00  INFO 6292 --- [spring-boot-jwt-auth-refresh] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2025-06-22T11:57:24.952+02:00  INFO 6292 --- [spring-boot-jwt-auth-refresh] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-06-22T11:57:25.022+02:00  INFO 6292 --- [spring-boot-jwt-auth-refresh] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2025-06-22T11:57:25.408+02:00  INFO 6292 --- [spring-boot-jwt-auth-refresh] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5353dd09
-2025-06-22T11:57:25.413+02:00  INFO 6292 --- [spring-boot-jwt-auth-refresh] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2025-06-22T11:57:25.462+02:00  WARN 6292 --- [spring-boot-jwt-auth-refresh] [main] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-06-22T11:57:25.464+02:00  WARN 6292 --- [spring-boot-jwt-auth-refresh] [main] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-06-22T11:57:25.501+02:00  INFO 6292 --- [spring-boot-jwt-auth-refresh] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+2025-06-22 21:48:03 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-06-22 21:48:05 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-06-22 21:48:06 [main] DEBUG app.filter.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2025-06-22 21:48:06 [main] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2025-06-22 21:48:07 [main] DEBUG o.s.s.web.DefaultSecurityFilterChain - Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, LogoutFilter, JwtAuthenticationFilter, UsernamePasswordAuthenticationFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
+2025-06-22 21:48:08 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2025-06-22 21:48:08 [main] INFO  app.Application - Started Application in 17.488 seconds (process running for 19.16)
+2025-06-22 21:48:12 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-06-22 21:48:12 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-06-22 21:48:12 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-06-22 21:48:12 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-06-22 21:48:12 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-06-22T21:48:18.387+02:00  INFO 6480 --- [spring-boot-jwt-auth-refresh] [main] app.Application                          : Starting Application using Java 24.0.1 with PID 6480 (C:\DEV\spring-boot-jwt-auth-refresh\target\classes started by ALEX in C:\DEV\spring-boot-jwt-auth-refresh)
+2025-06-22T21:48:18.391+02:00 DEBUG 6480 --- [spring-boot-jwt-auth-refresh] [main] app.Application                          : Running with Spring Boot v3.5.3, Spring v6.2.8
+2025-06-22T21:48:18.393+02:00  INFO 6480 --- [spring-boot-jwt-auth-refresh] [main] app.Application                          : The following 1 profile is active: "dev"
+2025-06-22T21:48:20.178+02:00  INFO 6480 --- [spring-boot-jwt-auth-refresh] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-06-22T21:48:20.318+02:00  INFO 6480 --- [spring-boot-jwt-auth-refresh] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 117 ms. Found 2 JPA repository interfaces.
+2025-06-22T21:48:21.976+02:00  INFO 6480 --- [spring-boot-jwt-auth-refresh] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-06-22T21:48:22.006+02:00  INFO 6480 --- [spring-boot-jwt-auth-refresh] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-06-22T21:48:22.006+02:00  INFO 6480 --- [spring-boot-jwt-auth-refresh] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.42]
+2025-06-22T21:48:22.110+02:00  INFO 6480 --- [spring-boot-jwt-auth-refresh] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-06-22T21:48:22.111+02:00  INFO 6480 --- [spring-boot-jwt-auth-refresh] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3597 ms
+2025-06-22T21:48:22.486+02:00  INFO 6480 --- [spring-boot-jwt-auth-refresh] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-06-22T21:48:22.593+02:00  INFO 6480 --- [spring-boot-jwt-auth-refresh] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.18.Final
+2025-06-22T21:48:22.727+02:00  INFO 6480 --- [spring-boot-jwt-auth-refresh] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-06-22T21:48:23.622+02:00  INFO 6480 --- [spring-boot-jwt-auth-refresh] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-06-22T21:48:23.711+02:00  INFO 6480 --- [spring-boot-jwt-auth-refresh] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-06-22T21:48:24.140+02:00  INFO 6480 --- [spring-boot-jwt-auth-refresh] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@4a9b92c6
+2025-06-22T21:48:24.146+02:00  INFO 6480 --- [spring-boot-jwt-auth-refresh] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-06-22T21:48:24.225+02:00  WARN 6480 --- [spring-boot-jwt-auth-refresh] [main] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-06-22T21:48:24.230+02:00  WARN 6480 --- [spring-boot-jwt-auth-refresh] [main] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-06-22T21:48:24.281+02:00  INFO 6480 --- [spring-boot-jwt-auth-refresh] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
 	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
 	Database driver: undefined/unknown
 	Database version: 8.0
@@ -250,116 +78,51 @@
 	Isolation level: undefined/unknown
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-2025-06-22T11:57:27.603+02:00  INFO 6292 --- [spring-boot-jwt-auth-refresh] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-06-22T11:57:27.638+02:00 DEBUG 6292 --- [spring-boot-jwt-auth-refresh] [main] org.hibernate.SQL                        : 
-    drop table if exists products
-2025-06-22T11:57:28.657+02:00 DEBUG 6292 --- [spring-boot-jwt-auth-refresh] [main] org.hibernate.SQL                        : 
-    drop table if exists products_seq
-2025-06-22T11:57:28.661+02:00 DEBUG 6292 --- [spring-boot-jwt-auth-refresh] [main] org.hibernate.SQL                        : 
-    drop table if exists users
-2025-06-22T11:57:28.673+02:00 DEBUG 6292 --- [spring-boot-jwt-auth-refresh] [main] org.hibernate.SQL                        : 
-    create table products (
-        price decimal(38,2) not null,
-        id bigint not null,
-        name varchar(255) not null,
-        primary key (id)
-    ) engine=InnoDB
-2025-06-22T11:57:28.686+02:00 DEBUG 6292 --- [spring-boot-jwt-auth-refresh] [main] org.hibernate.SQL                        : 
-    create table products_seq (
-        next_val bigint
-    ) engine=InnoDB
-2025-06-22T11:57:28.700+02:00 DEBUG 6292 --- [spring-boot-jwt-auth-refresh] [main] org.hibernate.SQL                        : 
-    insert into products_seq values ( 1 )
-2025-06-22T11:57:28.706+02:00 DEBUG 6292 --- [spring-boot-jwt-auth-refresh] [main] org.hibernate.SQL                        : 
-    create table users (
-        created_at datetime(6),
-        id bigint not null auto_increment,
-        updated_at datetime(6),
-        full_name varchar(50) not null,
-        username varchar(50) not null,
-        password varchar(255) not null,
-        role enum ('ROLE_ADMIN','ROLE_USER') not null,
-        primary key (id)
-    ) engine=InnoDB
-2025-06-22T11:57:28.723+02:00 DEBUG 6292 --- [spring-boot-jwt-auth-refresh] [main] org.hibernate.SQL                        : 
-    alter table users 
-       add constraint UKr43af9ap4edm43mmtq01oddj6 unique (username)
-2025-06-22T11:57:28.747+02:00  INFO 6292 --- [spring-boot-jwt-auth-refresh] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-06-22T11:57:29.604+02:00 DEBUG 6292 --- [spring-boot-jwt-auth-refresh] [main] app.filter.JwtAuthenticationFilter       : Filter 'jwtAuthenticationFilter' configured for use
-2025-06-22T11:57:29.605+02:00 DEBUG 6292 --- [spring-boot-jwt-auth-refresh] [main] app.filter.RequestLoggingFilter          : Filter 'requestLoggingFilter' configured for use
-2025-06-22T11:57:29.770+02:00  INFO 6292 --- [spring-boot-jwt-auth-refresh] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
-2025-06-22T11:57:30.796+02:00 DEBUG 6292 --- [spring-boot-jwt-auth-refresh] [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, LogoutFilter, RequestLoggingFilter, JwtAuthenticationFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
-2025-06-22T11:57:31.563+02:00  INFO 6292 --- [spring-boot-jwt-auth-refresh] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
-2025-06-22T11:57:31.580+02:00  INFO 6292 --- [spring-boot-jwt-auth-refresh] [main] app.Application                          : Started Application in 12.904 seconds (process running for 14.565)
-2025-06-22T11:57:57.466+02:00  INFO 6292 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-06-22T11:57:57.467+02:00  INFO 6292 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2025-06-22T11:57:57.470+02:00  INFO 6292 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
-2025-06-22T11:57:57.513+02:00 DEBUG 6292 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing POST /api/auth/login
-2025-06-22T11:57:57.533+02:00  INFO 6292 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-2] app.filter.RequestLoggingFilter          : Request URL: POST http://localhost:8080/api/auth/login
-2025-06-22T11:57:57.534+02:00  INFO 6292 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-2] app.filter.RequestLoggingFilter          : Content-Type: application/json
-2025-06-22T11:57:57.534+02:00  INFO 6292 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-2] app.filter.RequestLoggingFilter          : Content-Length: 53
-2025-06-22T11:57:57.540+02:00 DEBUG 6292 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-2] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
-2025-06-22T11:57:57.542+02:00 DEBUG 6292 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-2] o.s.s.w.session.SessionManagementFilter  : Request requested invalid session id 3707F987AF2E25021EB804BDF1FBE0A9
-2025-06-22T11:57:57.549+02:00 DEBUG 6292 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Secured POST /api/auth/login
-2025-06-22T11:57:57.715+02:00  INFO 6292 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-2] app.controller.AuthController            : Raw login request received: {username=alex, password=password123}
-2025-06-22T11:57:57.717+02:00  INFO 6292 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-2] app.controller.AuthController            : Attempting login for user: 'alex'
-2025-06-22T11:57:57.717+02:00  INFO 6292 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-2] app.service.AuthService                  : Attempting to authenticate user: 'alex'
-2025-06-22T11:57:57.863+02:00  INFO 6292 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-2] app.service.CustomUserDetailsService     : Attempting to load user by username: alex
-2025-06-22T11:57:57.895+02:00 DEBUG 6292 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-2] app.repository.UserRepository            : Searching for user by username: alex
-2025-06-22T11:57:58.245+02:00 DEBUG 6292 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-2] org.hibernate.SQL                        : 
-    select
-        u1_0.id,
-        u1_0.created_at,
-        u1_0.full_name,
-        u1_0.password,
-        u1_0.role,
-        u1_0.updated_at,
-        u1_0.username 
-    from
-        users u1_0 
-    where
-        u1_0.username=?
-2025-06-22T11:57:58.399+02:00 DEBUG 6292 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-2] app.repository.UserRepository            : User found by username 'alex': no
-2025-06-22T11:57:58.403+02:00  WARN 6292 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-2] app.service.CustomUserDetailsService     : User not found with username: alex
-2025-06-22T11:57:58.548+02:00 DEBUG 6292 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-2] o.s.s.a.dao.DaoAuthenticationProvider    : Failed to find user 'alex'
-2025-06-22T11:57:58.556+02:00 DEBUG 6292 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-2] o.s.s.authentication.ProviderManager     : Authentication failed with provider DaoAuthenticationProvider since Bad credentials
-2025-06-22T11:57:58.557+02:00 ERROR 6292 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-2] app.service.AuthService                  : Authentication failed - invalid credentials for user: alex
-2025-06-22T11:57:58.558+02:00 ERROR 6292 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-2] app.controller.AuthController            : Login failed - invalid credentials for user: alex
-2025-06-22T11:57:58.638+02:00  INFO 6292 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-2] app.filter.RequestLoggingFilter          : Request payload: {
-  "username": "alex",
-  "password": "password123"
-}
-2025-06-22T11:59:19.543+02:00  INFO 6292 --- [spring-boot-jwt-auth-refresh] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
-2025-06-22T11:59:19.579+02:00  INFO 6292 --- [spring-boot-jwt-auth-refresh] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
-2025-06-22T11:59:19.590+02:00  INFO 6292 --- [spring-boot-jwt-auth-refresh] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2025-06-22T11:59:19.592+02:00 DEBUG 6292 --- [spring-boot-jwt-auth-refresh] [SpringApplicationShutdownHook] org.hibernate.SQL                        : 
-    drop table if exists products
-2025-06-22T11:59:19.609+02:00 DEBUG 6292 --- [spring-boot-jwt-auth-refresh] [SpringApplicationShutdownHook] org.hibernate.SQL                        : 
-    drop table if exists products_seq
-2025-06-22T11:59:19.618+02:00 DEBUG 6292 --- [spring-boot-jwt-auth-refresh] [SpringApplicationShutdownHook] org.hibernate.SQL                        : 
-    drop table if exists users
-2025-06-22T11:59:19.632+02:00  INFO 6292 --- [spring-boot-jwt-auth-refresh] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2025-06-22T11:59:19.675+02:00  INFO 6292 --- [spring-boot-jwt-auth-refresh] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-2025-06-22T12:00:26.559+02:00  INFO 6524 --- [spring-boot-jwt-auth-refresh] [main] app.Application                          : Starting Application using Java 24.0.1 with PID 6524 (C:\DEV\spring-boot-jwt-auth-refresh\target\classes started by ALEX in C:\DEV\spring-boot-jwt-auth-refresh)
-2025-06-22T12:00:26.563+02:00 DEBUG 6524 --- [spring-boot-jwt-auth-refresh] [main] app.Application                          : Running with Spring Boot v3.5.3, Spring v6.2.8
-2025-06-22T12:00:26.565+02:00  INFO 6524 --- [spring-boot-jwt-auth-refresh] [main] app.Application                          : The following 1 profile is active: "dev"
-2025-06-22T12:00:28.466+02:00  INFO 6524 --- [spring-boot-jwt-auth-refresh] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-06-22T12:00:28.620+02:00  INFO 6524 --- [spring-boot-jwt-auth-refresh] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 131 ms. Found 2 JPA repository interfaces.
-2025-06-22T12:00:30.075+02:00  INFO 6524 --- [spring-boot-jwt-auth-refresh] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
-2025-06-22T12:00:30.111+02:00  INFO 6524 --- [spring-boot-jwt-auth-refresh] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2025-06-22T12:00:30.113+02:00  INFO 6524 --- [spring-boot-jwt-auth-refresh] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.42]
-2025-06-22T12:00:30.263+02:00  INFO 6524 --- [spring-boot-jwt-auth-refresh] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2025-06-22T12:00:30.264+02:00  INFO 6524 --- [spring-boot-jwt-auth-refresh] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3573 ms
-2025-06-22T12:00:30.692+02:00  INFO 6524 --- [spring-boot-jwt-auth-refresh] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-06-22T12:00:30.837+02:00  INFO 6524 --- [spring-boot-jwt-auth-refresh] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.18.Final
-2025-06-22T12:00:30.924+02:00  INFO 6524 --- [spring-boot-jwt-auth-refresh] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2025-06-22T12:00:31.704+02:00  INFO 6524 --- [spring-boot-jwt-auth-refresh] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-06-22T12:00:31.842+02:00  INFO 6524 --- [spring-boot-jwt-auth-refresh] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2025-06-22T12:00:32.397+02:00  INFO 6524 --- [spring-boot-jwt-auth-refresh] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3973b6d4
-2025-06-22T12:00:32.403+02:00  INFO 6524 --- [spring-boot-jwt-auth-refresh] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2025-06-22T12:00:32.463+02:00  WARN 6524 --- [spring-boot-jwt-auth-refresh] [main] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-06-22T12:00:32.466+02:00  WARN 6524 --- [spring-boot-jwt-auth-refresh] [main] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-06-22T12:00:32.512+02:00  INFO 6524 --- [spring-boot-jwt-auth-refresh] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+2025-06-22T21:48:26.245+02:00  INFO 6480 --- [spring-boot-jwt-auth-refresh] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-06-22T21:48:27.363+02:00  INFO 6480 --- [spring-boot-jwt-auth-refresh] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-06-22T21:48:28.208+02:00 DEBUG 6480 --- [spring-boot-jwt-auth-refresh] [main] app.filter.JwtAuthenticationFilter       : Filter 'jwtAuthenticationFilter' configured for use
+2025-06-22T21:48:28.378+02:00  INFO 6480 --- [spring-boot-jwt-auth-refresh] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2025-06-22T21:48:29.348+02:00 DEBUG 6480 --- [spring-boot-jwt-auth-refresh] [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, LogoutFilter, JwtAuthenticationFilter, UsernamePasswordAuthenticationFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
+2025-06-22T21:48:30.059+02:00  INFO 6480 --- [spring-boot-jwt-auth-refresh] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-06-22T21:48:30.076+02:00  INFO 6480 --- [spring-boot-jwt-auth-refresh] [main] app.Application                          : Started Application in 12.804 seconds (process running for 14.262)
+2025-06-22T21:48:43.326+02:00  INFO 6480 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-06-22T21:48:43.326+02:00  INFO 6480 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-06-22T21:48:43.329+02:00  INFO 6480 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-06-22T21:48:43.378+02:00 DEBUG 6480 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing POST /api/auth/register
+2025-06-22T21:48:43.395+02:00 DEBUG 6480 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-2] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2025-06-22T21:48:43.396+02:00 DEBUG 6480 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-2] o.s.s.w.session.SessionManagementFilter  : Request requested invalid session id 3707F987AF2E25021EB804BDF1FBE0A9
+2025-06-22T21:48:43.401+02:00 DEBUG 6480 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Secured POST /api/auth/register
+2025-06-22T21:48:48.578+02:00 DEBUG 6480 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing POST /api/auth/login
+2025-06-22T21:48:49.025+02:00 DEBUG 6480 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-3] o.s.s.a.dao.DaoAuthenticationProvider    : Failed to find user ''
+2025-06-22T21:48:49.026+02:00 DEBUG 6480 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-3] o.s.s.authentication.ProviderManager     : Authentication failed with provider DaoAuthenticationProvider since Bad credentials
+2025-06-22T21:48:49.304+02:00 DEBUG 6480 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-3] o.s.s.a.dao.DaoAuthenticationProvider    : Failed to find user ''
+2025-06-22T21:48:49.308+02:00 DEBUG 6480 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-3] o.s.s.authentication.ProviderManager     : Authentication failed with provider DaoAuthenticationProvider since Bad credentials
+2025-06-22T21:48:49.309+02:00 DEBUG 6480 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-3] o.s.s.authentication.ProviderManager     : Denying authentication since all attempted providers failed
+2025-06-22T21:50:11.291+02:00  INFO 6480 --- [spring-boot-jwt-auth-refresh] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-06-22T21:50:11.304+02:00  INFO 6480 --- [spring-boot-jwt-auth-refresh] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-06-22T21:50:11.315+02:00  INFO 6480 --- [spring-boot-jwt-auth-refresh] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-06-22T21:50:11.351+02:00  INFO 6480 --- [spring-boot-jwt-auth-refresh] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-06-22T21:50:11.372+02:00  INFO 6480 --- [spring-boot-jwt-auth-refresh] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-06-22T21:51:52.315+02:00  INFO 16012 --- [spring-boot-jwt-auth-refresh] [main] app.Application                          : Starting Application using Java 24.0.1 with PID 16012 (C:\DEV\spring-boot-jwt-auth-refresh\target\classes started by ALEX in C:\DEV\spring-boot-jwt-auth-refresh)
+2025-06-22T21:51:52.319+02:00 DEBUG 16012 --- [spring-boot-jwt-auth-refresh] [main] app.Application                          : Running with Spring Boot v3.5.3, Spring v6.2.8
+2025-06-22T21:51:52.320+02:00  INFO 16012 --- [spring-boot-jwt-auth-refresh] [main] app.Application                          : The following 1 profile is active: "dev"
+2025-06-22T21:51:54.438+02:00  INFO 16012 --- [spring-boot-jwt-auth-refresh] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-06-22T21:51:54.604+02:00  INFO 16012 --- [spring-boot-jwt-auth-refresh] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 141 ms. Found 2 JPA repository interfaces.
+2025-06-22T21:51:55.977+02:00  INFO 16012 --- [spring-boot-jwt-auth-refresh] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-06-22T21:51:56.032+02:00  INFO 16012 --- [spring-boot-jwt-auth-refresh] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-06-22T21:51:56.034+02:00  INFO 16012 --- [spring-boot-jwt-auth-refresh] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.42]
+2025-06-22T21:51:56.259+02:00  INFO 16012 --- [spring-boot-jwt-auth-refresh] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-06-22T21:51:56.260+02:00  INFO 16012 --- [spring-boot-jwt-auth-refresh] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3763 ms
+2025-06-22T21:51:58.437+02:00  INFO 16012 --- [spring-boot-jwt-auth-refresh] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-06-22T21:51:58.682+02:00  INFO 16012 --- [spring-boot-jwt-auth-refresh] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.18.Final
+2025-06-22T21:51:58.789+02:00  INFO 16012 --- [spring-boot-jwt-auth-refresh] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-06-22T21:51:59.677+02:00  INFO 16012 --- [spring-boot-jwt-auth-refresh] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-06-22T21:51:59.742+02:00  INFO 16012 --- [spring-boot-jwt-auth-refresh] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-06-22T21:52:00.299+02:00  INFO 16012 --- [spring-boot-jwt-auth-refresh] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6e321d9d
+2025-06-22T21:52:00.303+02:00  INFO 16012 --- [spring-boot-jwt-auth-refresh] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-06-22T21:52:00.373+02:00  WARN 16012 --- [spring-boot-jwt-auth-refresh] [main] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-06-22T21:52:00.378+02:00  WARN 16012 --- [spring-boot-jwt-auth-refresh] [main] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-06-22T21:52:00.439+02:00  INFO 16012 --- [spring-boot-jwt-auth-refresh] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
 	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
 	Database driver: undefined/unknown
 	Database version: 8.0
@@ -367,109 +130,115 @@
 	Isolation level: undefined/unknown
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-2025-06-22T12:00:34.848+02:00  INFO 6524 --- [spring-boot-jwt-auth-refresh] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-06-22T12:00:34.888+02:00 DEBUG 6524 --- [spring-boot-jwt-auth-refresh] [main] org.hibernate.SQL                        : 
-    drop table if exists products
-2025-06-22T12:00:36.069+02:00 DEBUG 6524 --- [spring-boot-jwt-auth-refresh] [main] org.hibernate.SQL                        : 
-    drop table if exists products_seq
-2025-06-22T12:00:36.074+02:00 DEBUG 6524 --- [spring-boot-jwt-auth-refresh] [main] org.hibernate.SQL                        : 
-    drop table if exists users
-2025-06-22T12:00:36.088+02:00 DEBUG 6524 --- [spring-boot-jwt-auth-refresh] [main] org.hibernate.SQL                        : 
-    create table products (
-        price decimal(38,2) not null,
-        id bigint not null,
-        name varchar(255) not null,
-        primary key (id)
-    ) engine=InnoDB
-2025-06-22T12:00:36.108+02:00 DEBUG 6524 --- [spring-boot-jwt-auth-refresh] [main] org.hibernate.SQL                        : 
-    create table products_seq (
-        next_val bigint
-    ) engine=InnoDB
-2025-06-22T12:00:36.124+02:00 DEBUG 6524 --- [spring-boot-jwt-auth-refresh] [main] org.hibernate.SQL                        : 
-    insert into products_seq values ( 1 )
-2025-06-22T12:00:36.130+02:00 DEBUG 6524 --- [spring-boot-jwt-auth-refresh] [main] org.hibernate.SQL                        : 
-    create table users (
-        created_at datetime(6),
-        id bigint not null auto_increment,
-        updated_at datetime(6),
-        full_name varchar(50) not null,
-        username varchar(50) not null,
-        password varchar(255) not null,
-        role enum ('ROLE_ADMIN','ROLE_USER') not null,
-        primary key (id)
-    ) engine=InnoDB
-2025-06-22T12:00:36.153+02:00 DEBUG 6524 --- [spring-boot-jwt-auth-refresh] [main] org.hibernate.SQL                        : 
-    alter table users 
-       add constraint UKr43af9ap4edm43mmtq01oddj6 unique (username)
-2025-06-22T12:00:36.179+02:00  INFO 6524 --- [spring-boot-jwt-auth-refresh] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-06-22T12:00:37.227+02:00 DEBUG 6524 --- [spring-boot-jwt-auth-refresh] [main] app.filter.JwtAuthenticationFilter       : Filter 'jwtAuthenticationFilter' configured for use
-2025-06-22T12:00:37.229+02:00 DEBUG 6524 --- [spring-boot-jwt-auth-refresh] [main] app.filter.RequestLoggingFilter          : Filter 'requestLoggingFilter' configured for use
-2025-06-22T12:00:37.437+02:00  INFO 6524 --- [spring-boot-jwt-auth-refresh] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
-2025-06-22T12:00:38.742+02:00 DEBUG 6524 --- [spring-boot-jwt-auth-refresh] [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, LogoutFilter, RequestLoggingFilter, JwtAuthenticationFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
-2025-06-22T12:00:39.671+02:00  INFO 6524 --- [spring-boot-jwt-auth-refresh] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
-2025-06-22T12:00:39.688+02:00  INFO 6524 --- [spring-boot-jwt-auth-refresh] [main] app.Application                          : Started Application in 14.274 seconds (process running for 15.782)
-2025-06-22T12:01:08.146+02:00  INFO 6524 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-06-22T12:01:08.147+02:00  INFO 6524 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2025-06-22T12:01:08.150+02:00  INFO 6524 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
-2025-06-22T12:01:08.196+02:00 DEBUG 6524 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing POST /api/auth/register
-2025-06-22T12:01:08.213+02:00 DEBUG 6524 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-1] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
-2025-06-22T12:01:08.213+02:00 DEBUG 6524 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-1] o.s.s.w.session.SessionManagementFilter  : Request requested invalid session id 3707F987AF2E25021EB804BDF1FBE0A9
-2025-06-22T12:01:08.219+02:00 DEBUG 6524 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Secured POST /api/auth/register
-2025-06-22T12:01:08.540+02:00  INFO 6524 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-1] app.service.AuthService                  : Registering new user with username: alex
-2025-06-22T12:01:08.549+02:00 DEBUG 6524 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-1] app.repository.UserRepository            : Checking if user exists with username: alex
-2025-06-22T12:01:08.809+02:00 DEBUG 6524 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-1] org.hibernate.SQL                        : 
-    select
-        u1_0.id 
-    from
-        users u1_0 
-    where
-        upper(u1_0.username)=upper(?) 
-    limit
-        ?
-2025-06-22T12:01:08.916+02:00 DEBUG 6524 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-1] app.repository.UserRepository            : User with username 'alex' exists: false
-2025-06-22T12:01:09.202+02:00 DEBUG 6524 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-1] org.hibernate.SQL                        : 
-    insert 
-    into
-        users
-        (created_at, full_name, password, role, updated_at, username) 
-    values
-        (?, ?, ?, ?, ?, ?)
-2025-06-22T12:01:09.247+02:00  INFO 6524 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-1] app.service.AuthService                  : Successfully registered user: alex with role: ROLE_ADMIN
-2025-06-22T12:01:16.898+02:00 DEBUG 6524 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing POST /api/auth/login
-2025-06-22T12:01:16.907+02:00  INFO 6524 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-2] app.filter.RequestLoggingFilter          : Request URL: POST http://localhost:8080/api/auth/login
-2025-06-22T12:01:16.908+02:00  INFO 6524 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-2] app.filter.RequestLoggingFilter          : Content-Type: application/json
-2025-06-22T12:01:16.909+02:00  INFO 6524 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-2] app.filter.RequestLoggingFilter          : Content-Length: 53
-2025-06-22T12:01:16.917+02:00 DEBUG 6524 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-2] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
-2025-06-22T12:01:16.920+02:00 DEBUG 6524 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-2] o.s.s.w.session.SessionManagementFilter  : Request requested invalid session id 3707F987AF2E25021EB804BDF1FBE0A9
-2025-06-22T12:01:16.921+02:00 DEBUG 6524 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Secured POST /api/auth/login
-2025-06-22T12:01:16.947+02:00  INFO 6524 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-2] app.controller.AuthController            : Raw login request received: {username=alex, password=password123}
-2025-06-22T12:01:16.948+02:00  INFO 6524 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-2] app.controller.AuthController            : Attempting login for user: 'alex'
-2025-06-22T12:01:16.950+02:00  INFO 6524 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-2] app.service.AuthService                  : Attempting to authenticate user: 'alex'
-2025-06-22T12:01:17.170+02:00  INFO 6524 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-2] app.service.CustomUserDetailsService     : Attempting to load user by username: alex
-2025-06-22T12:01:17.176+02:00 DEBUG 6524 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-2] app.repository.UserRepository            : Searching for user by username: alex
-2025-06-22T12:01:17.295+02:00 DEBUG 6524 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-2] org.hibernate.SQL                        : 
-    select
-        u1_0.id,
-        u1_0.created_at,
-        u1_0.full_name,
-        u1_0.password,
-        u1_0.role,
-        u1_0.updated_at,
-        u1_0.username 
-    from
-        users u1_0 
-    where
-        u1_0.username=?
-2025-06-22T12:01:17.336+02:00 DEBUG 6524 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-2] app.repository.UserRepository            : User found by username 'alex': yes
-2025-06-22T12:01:17.337+02:00 DEBUG 6524 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-2] app.service.CustomUserDetailsService     : Found user: alex with role: ROLE_ADMIN
-2025-06-22T12:01:18.206+02:00 DEBUG 6524 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-2] o.s.s.a.dao.DaoAuthenticationProvider    : Authenticated user
-2025-06-22T12:01:18.208+02:00  INFO 6524 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-2] app.service.AuthService                  : Authentication successful for user: 'alex'
-2025-06-22T12:01:19.511+02:00 DEBUG 6524 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-2] app.service.JwtService                   : Generated token pair for user 'alex'
-2025-06-22T12:01:19.512+02:00  INFO 6524 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-2] app.controller.AuthController            : Login successful for user: 'alex'
-2025-06-22T12:01:19.518+02:00  INFO 6524 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-2] app.filter.RequestLoggingFilter          : Request payload: {
-  "username": "alex",
-  "password": "password123"
-}
-2025-06-22T12:02:00.096+02:00 DEBUG 6524 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing POST /api/products
-2025-06-22T12:02:00.097+02:00 DEBUG 6524 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-3] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
-2025-06-22T12:02:00.097+02:00 DEBUG 6524 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-3] o.s.s.w.session.SessionManagementFilter  : Request requested invalid session id 3707F987AF2E25021EB804BDF1FBE0A9
+2025-06-22T21:52:03.888+02:00  INFO 16012 --- [spring-boot-jwt-auth-refresh] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-06-22T21:52:05.156+02:00  INFO 16012 --- [spring-boot-jwt-auth-refresh] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-06-22T21:52:06.079+02:00 DEBUG 16012 --- [spring-boot-jwt-auth-refresh] [main] app.filter.JwtAuthenticationFilter       : Filter 'jwtAuthenticationFilter' configured for use
+2025-06-22T21:52:06.302+02:00  INFO 16012 --- [spring-boot-jwt-auth-refresh] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2025-06-22T21:52:25.804+02:00  INFO 14268 --- [spring-boot-jwt-auth-refresh] [main] app.Application                          : Starting Application using Java 24.0.1 with PID 14268 (C:\DEV\spring-boot-jwt-auth-refresh\target\classes started by ALEX in C:\DEV\spring-boot-jwt-auth-refresh)
+2025-06-22T21:52:25.809+02:00 DEBUG 14268 --- [spring-boot-jwt-auth-refresh] [main] app.Application                          : Running with Spring Boot v3.5.3, Spring v6.2.8
+2025-06-22T21:52:25.811+02:00  INFO 14268 --- [spring-boot-jwt-auth-refresh] [main] app.Application                          : The following 1 profile is active: "dev"
+2025-06-22T21:52:27.730+02:00  INFO 14268 --- [spring-boot-jwt-auth-refresh] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-06-22T21:52:27.878+02:00  INFO 14268 --- [spring-boot-jwt-auth-refresh] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 125 ms. Found 2 JPA repository interfaces.
+2025-06-22T21:52:29.295+02:00  INFO 14268 --- [spring-boot-jwt-auth-refresh] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-06-22T21:52:29.324+02:00  INFO 14268 --- [spring-boot-jwt-auth-refresh] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-06-22T21:52:29.325+02:00  INFO 14268 --- [spring-boot-jwt-auth-refresh] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.42]
+2025-06-22T21:52:29.431+02:00  INFO 14268 --- [spring-boot-jwt-auth-refresh] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-06-22T21:52:29.433+02:00  INFO 14268 --- [spring-boot-jwt-auth-refresh] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3475 ms
+2025-06-22T21:52:29.809+02:00  INFO 14268 --- [spring-boot-jwt-auth-refresh] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-06-22T21:52:29.918+02:00  INFO 14268 --- [spring-boot-jwt-auth-refresh] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.18.Final
+2025-06-22T21:52:29.988+02:00  INFO 14268 --- [spring-boot-jwt-auth-refresh] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-06-22T21:52:30.823+02:00  INFO 14268 --- [spring-boot-jwt-auth-refresh] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-06-22T21:52:30.886+02:00  INFO 14268 --- [spring-boot-jwt-auth-refresh] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-06-22T21:52:31.237+02:00  INFO 14268 --- [spring-boot-jwt-auth-refresh] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@1182d1df
+2025-06-22T21:52:31.241+02:00  INFO 14268 --- [spring-boot-jwt-auth-refresh] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-06-22T21:52:31.289+02:00  WARN 14268 --- [spring-boot-jwt-auth-refresh] [main] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-06-22T21:52:31.292+02:00  WARN 14268 --- [spring-boot-jwt-auth-refresh] [main] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-06-22T21:52:31.329+02:00  INFO 14268 --- [spring-boot-jwt-auth-refresh] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-06-22T21:52:33.541+02:00  INFO 14268 --- [spring-boot-jwt-auth-refresh] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-06-22T21:52:33.716+02:00  INFO 14268 --- [spring-boot-jwt-auth-refresh] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-06-22T21:52:34.693+02:00 DEBUG 14268 --- [spring-boot-jwt-auth-refresh] [main] app.filter.JwtAuthenticationFilter       : Filter 'jwtAuthenticationFilter' configured for use
+2025-06-22T21:52:34.867+02:00  INFO 14268 --- [spring-boot-jwt-auth-refresh] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2025-06-22T21:52:36.168+02:00 DEBUG 14268 --- [spring-boot-jwt-auth-refresh] [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, LogoutFilter, JwtAuthenticationFilter, UsernamePasswordAuthenticationFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
+2025-06-22T21:52:37.112+02:00  INFO 14268 --- [spring-boot-jwt-auth-refresh] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-06-22T21:52:37.140+02:00  INFO 14268 --- [spring-boot-jwt-auth-refresh] [main] app.Application                          : Started Application in 12.504 seconds (process running for 14.136)
+2025-06-22T21:52:56.283+02:00  INFO 14268 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-06-22T21:52:56.284+02:00  INFO 14268 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-06-22T21:52:56.287+02:00  INFO 14268 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2025-06-22T21:52:56.349+02:00 DEBUG 14268 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing POST /api/auth/register
+2025-06-22T21:52:56.371+02:00 DEBUG 14268 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-1] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2025-06-22T21:52:56.372+02:00 DEBUG 14268 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-1] o.s.s.w.session.SessionManagementFilter  : Request requested invalid session id 3707F987AF2E25021EB804BDF1FBE0A9
+2025-06-22T21:52:56.380+02:00 DEBUG 14268 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Secured POST /api/auth/register
+2025-06-22T21:53:01.224+02:00 DEBUG 14268 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing POST /api/auth/login
+2025-06-22T21:53:01.676+02:00 DEBUG 14268 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-2] o.s.s.a.dao.DaoAuthenticationProvider    : Failed to find user ''
+2025-06-22T21:53:01.677+02:00 DEBUG 14268 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-2] o.s.s.authentication.ProviderManager     : Authentication failed with provider DaoAuthenticationProvider since Bad credentials
+2025-06-22T21:53:02.035+02:00 DEBUG 14268 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-2] o.s.s.a.dao.DaoAuthenticationProvider    : Failed to find user ''
+2025-06-22T21:53:02.041+02:00 DEBUG 14268 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-2] o.s.s.authentication.ProviderManager     : Authentication failed with provider DaoAuthenticationProvider since Bad credentials
+2025-06-22T21:53:02.042+02:00 DEBUG 14268 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-2] o.s.s.authentication.ProviderManager     : Denying authentication since all attempted providers failed
+2025-06-22T21:53:09.510+02:00  INFO 14268 --- [spring-boot-jwt-auth-refresh] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-06-22T21:53:09.521+02:00  INFO 14268 --- [spring-boot-jwt-auth-refresh] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-06-22T21:53:09.531+02:00  INFO 14268 --- [spring-boot-jwt-auth-refresh] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-06-22T21:53:09.572+02:00  INFO 14268 --- [spring-boot-jwt-auth-refresh] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-06-22T21:53:09.597+02:00  INFO 14268 --- [spring-boot-jwt-auth-refresh] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-06-22T21:54:40.976+02:00  INFO 14544 --- [spring-boot-jwt-auth-refresh] [main] app.Application                          : Starting Application using Java 24.0.1 with PID 14544 (C:\DEV\spring-boot-jwt-auth-refresh\target\classes started by ALEX in C:\DEV\spring-boot-jwt-auth-refresh)
+2025-06-22T21:54:40.980+02:00 DEBUG 14544 --- [spring-boot-jwt-auth-refresh] [main] app.Application                          : Running with Spring Boot v3.5.3, Spring v6.2.8
+2025-06-22T21:54:40.982+02:00  INFO 14544 --- [spring-boot-jwt-auth-refresh] [main] app.Application                          : The following 1 profile is active: "dev"
+2025-06-22T21:54:42.821+02:00  INFO 14544 --- [spring-boot-jwt-auth-refresh] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-06-22T21:54:42.989+02:00  INFO 14544 --- [spring-boot-jwt-auth-refresh] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 144 ms. Found 2 JPA repository interfaces.
+2025-06-22T21:54:44.352+02:00  INFO 14544 --- [spring-boot-jwt-auth-refresh] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-06-22T21:54:44.400+02:00  INFO 14544 --- [spring-boot-jwt-auth-refresh] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-06-22T21:54:44.401+02:00  INFO 14544 --- [spring-boot-jwt-auth-refresh] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.42]
+2025-06-22T21:54:44.508+02:00  INFO 14544 --- [spring-boot-jwt-auth-refresh] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-06-22T21:54:44.510+02:00  INFO 14544 --- [spring-boot-jwt-auth-refresh] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3404 ms
+2025-06-22T21:54:44.895+02:00  INFO 14544 --- [spring-boot-jwt-auth-refresh] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-06-22T21:54:45.027+02:00  INFO 14544 --- [spring-boot-jwt-auth-refresh] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.18.Final
+2025-06-22T21:54:45.108+02:00  INFO 14544 --- [spring-boot-jwt-auth-refresh] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-06-22T21:54:45.831+02:00  INFO 14544 --- [spring-boot-jwt-auth-refresh] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-06-22T21:54:45.893+02:00  INFO 14544 --- [spring-boot-jwt-auth-refresh] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-06-22T21:54:46.286+02:00  INFO 14544 --- [spring-boot-jwt-auth-refresh] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5486ee92
+2025-06-22T21:54:46.290+02:00  INFO 14544 --- [spring-boot-jwt-auth-refresh] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-06-22T21:54:46.351+02:00  WARN 14544 --- [spring-boot-jwt-auth-refresh] [main] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-06-22T21:54:46.354+02:00  WARN 14544 --- [spring-boot-jwt-auth-refresh] [main] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-06-22T21:54:46.399+02:00  INFO 14544 --- [spring-boot-jwt-auth-refresh] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-06-22T21:54:48.971+02:00  INFO 14544 --- [spring-boot-jwt-auth-refresh] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-06-22T21:54:50.109+02:00  INFO 14544 --- [spring-boot-jwt-auth-refresh] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-06-22T21:54:50.901+02:00 DEBUG 14544 --- [spring-boot-jwt-auth-refresh] [main] app.filter.JwtAuthenticationFilter       : Filter 'jwtAuthenticationFilter' configured for use
+2025-06-22T21:54:51.078+02:00  INFO 14544 --- [spring-boot-jwt-auth-refresh] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2025-06-22T21:54:52.136+02:00 DEBUG 14544 --- [spring-boot-jwt-auth-refresh] [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, LogoutFilter, JwtAuthenticationFilter, UsernamePasswordAuthenticationFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
+2025-06-22T21:54:52.933+02:00  INFO 14544 --- [spring-boot-jwt-auth-refresh] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-06-22T21:54:52.949+02:00  INFO 14544 --- [spring-boot-jwt-auth-refresh] [main] app.Application                          : Started Application in 13.169 seconds (process running for 15.072)
+2025-06-22T21:55:04.530+02:00  INFO 14544 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-06-22T21:55:04.531+02:00  INFO 14544 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-06-22T21:55:04.534+02:00  INFO 14544 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2025-06-22T21:55:04.583+02:00 DEBUG 14544 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing POST /api/auth/register
+2025-06-22T21:55:04.603+02:00 DEBUG 14544 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-2] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2025-06-22T21:55:04.604+02:00 DEBUG 14544 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-2] o.s.s.w.session.SessionManagementFilter  : Request requested invalid session id 3707F987AF2E25021EB804BDF1FBE0A9
+2025-06-22T21:55:04.608+02:00 DEBUG 14544 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Secured POST /api/auth/register
+2025-06-22T21:55:10.242+02:00 DEBUG 14544 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing POST /api/auth/login
+2025-06-22T21:55:11.601+02:00 DEBUG 14544 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-3] o.s.s.a.dao.DaoAuthenticationProvider    : Failed to find user ''
+2025-06-22T21:55:11.602+02:00 DEBUG 14544 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-3] o.s.s.authentication.ProviderManager     : Authentication failed with provider DaoAuthenticationProvider since Bad credentials
+2025-06-22T21:55:11.906+02:00 DEBUG 14544 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-3] o.s.s.a.dao.DaoAuthenticationProvider    : Failed to find user ''
+2025-06-22T21:55:11.913+02:00 DEBUG 14544 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-3] o.s.s.authentication.ProviderManager     : Authentication failed with provider DaoAuthenticationProvider since Bad credentials
+2025-06-22T21:55:11.914+02:00 DEBUG 14544 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-3] o.s.s.authentication.ProviderManager     : Denying authentication since all attempted providers failed
+2025-06-22T21:55:18.047+02:00 DEBUG 14544 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing POST /api/auth/register
+2025-06-22T21:55:18.048+02:00 DEBUG 14544 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-1] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2025-06-22T21:55:18.049+02:00 DEBUG 14544 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-1] o.s.s.w.session.SessionManagementFilter  : Request requested invalid session id 3707F987AF2E25021EB804BDF1FBE0A9
+2025-06-22T21:55:18.050+02:00 DEBUG 14544 --- [spring-boot-jwt-auth-refresh] [http-nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Secured POST /api/auth/register
+2025-06-22T21:55:48.759+02:00  INFO 14544 --- [spring-boot-jwt-auth-refresh] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-06-22T21:55:48.770+02:00  INFO 14544 --- [spring-boot-jwt-auth-refresh] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-06-22T21:55:48.780+02:00  INFO 14544 --- [spring-boot-jwt-auth-refresh] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-06-22T21:55:48.814+02:00  INFO 14544 --- [spring-boot-jwt-auth-refresh] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-06-22T21:55:48.830+02:00  INFO 14544 --- [spring-boot-jwt-auth-refresh] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
