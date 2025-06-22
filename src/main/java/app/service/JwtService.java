@@ -23,7 +23,6 @@ import java.util.function.Function;
 @Service
 @Slf4j
 public class JwtService {
-
     /**
      * Secret key for signing access tokens.
      */
@@ -52,6 +51,7 @@ public class JwtService {
      * Standard JWT token prefix.
      */
     private static final String TOKEN_PREFIX = "Bearer ";
+
 
     /**
      * Generates a new JWT access token for the authenticated user.
@@ -86,11 +86,13 @@ public class JwtService {
         UserDetails userPrincipal = (UserDetails) authentication.getPrincipal();
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + refreshExpirationTime);
+        String jti = UUID.randomUUID().toString();
 
         Map<String, String> claims = new HashMap<>();
         claims.put("tokenType", "refreshToken");
 
         return TOKEN_PREFIX + Jwts.builder()
+                .header().add("typ", "JWT").and().id(jti)
                 .subject(userPrincipal.getUsername())
                 .claims(claims)
                 .issuedAt(now)
@@ -249,4 +251,35 @@ public class JwtService {
         log.debug("Generated token pair for user '{}'", authentication.getName());
         return new TokenPair(accessToken, refreshToken);
     }
+
+    /**
+     * Checks if the provided token is a refresh token.
+     *
+     * @param token The JWT token to check
+     * @return true if the token is a refresh token, false otherwise
+     */
+    public boolean isRefreshToken(String token) {
+        return extractClaims(token, true).isPresent();
+    }
+
+    /**
+     * Extracts the JWT ID (jti) from a token.
+     *
+     * @param token The JWT token
+     * @return An Optional containing the JWT ID if present, empty otherwise
+     */
+    public Optional<String> extractTokenId(String token) {
+        return extractClaims(token).map(Claims::getId);
+    }
+
+    /**
+     * Extracts the expiration date from a JWT token.
+     *
+     * @param token The JWT token
+     * @return An Optional containing the expiration date if present, empty otherwise
+     */
+    public Optional<Date> extractExpiration(String token) {
+        return extractClaims(token).map(Claims::getExpiration);
+    }
+
 }

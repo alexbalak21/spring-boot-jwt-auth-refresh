@@ -1,9 +1,6 @@
 package app.controller;
 
-import app.dto.LoginRequest;
-import app.dto.RegisterRequest;
-import app.dto.TokenPair;
-import app.dto.UserResponse;
+import app.dto.*;
 import app.model.User;
 import app.service.AuthService;
 import jakarta.validation.Valid;
@@ -58,4 +55,12 @@ public class AuthController {
             throw new BadCredentialsException("Authentication failed");
         }
     }
+
+    @PostMapping("/refresh")
+    public ResponseEntity<?> refreshToken(@Valid @RequestBody RefreshTokenRequest request) {
+        TokenPair tokenPair = authService.refreshToken(request);
+        return ResponseEntity.ok(tokenPair);
+    }
+
+
 }
