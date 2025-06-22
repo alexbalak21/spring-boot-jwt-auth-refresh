@@ -1,0 +1,84 @@
+@baseUrl = http://localhost:8080
+@contentType = application/json
+
+### 1. Register a new user
+POST {{baseUrl}}/api/auth/register
+Content-Type: {{contentType}}
+
+{
+  "username": "testuser",
+  "password": "Test@123"
+}
+
+### 2. Register with existing username (should fail)
+POST {{baseUrl}}/api/auth/register
+Content-Type: {{contentType}}
+
+{
+  "username": "testuser",
+  "password": "Test@123"
+}
+
+### 3. Login with valid credentials
+# @name login
+POST {{baseUrl}}/api/auth/login
+Content-Type: {{contentType}}
+
+{
+  "username": "testuser",
+  "password": "Test@123"
+}
+
+### 4. Get current user info (requires authentication)
+@authToken = {{login.response.body.token}}
+GET {{baseUrl}}/api/users/me
+Authorization: Bearer {{authToken}}
+
+### 5. Login with invalid password (should fail)
+POST {{baseUrl}}/api/auth/login
+Content-Type: {{contentType}}
+
+{
+  "username": "testuser",
+  "password": "wrongpassword"
+}
+
+### 6. Login with non-existent user (should fail)
+POST {{baseUrl}}/api/auth/login
+Content-Type: {{contentType}}
+
+{
+  "username": "nonexistent",
+  "password": "password123"
+}
+
+### 7. Register with invalid data (should fail validation)
+POST {{baseUrl}}/api/auth/register
+Content-Type: {{contentType}}
+
+{
+  "username": "ab",
+  "password": "123"
+}
+
+### 8. Get all users (requires ADMIN role)
+GET {{baseUrl}}/api/users
+Authorization: Bearer {{authToken}}
+
+### 9. Get user by ID (requires authentication)
+GET {{baseUrl}}/api/users/1
+Authorization: Bearer {{authToken}}
+
+### 10. Update user (requires authentication)
+PUT {{baseUrl}}/api/users/1
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+{
+  "username": "updateduser",
+  "password": "NewPass@123"
+}
+
+### 11. Delete user (requires ADMIN role)
+DELETE {{baseUrl}}/api/users/1
+Authorization: Bearer {{authToken}}
