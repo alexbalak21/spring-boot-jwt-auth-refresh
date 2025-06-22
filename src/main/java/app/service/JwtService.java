@@ -17,8 +17,19 @@ import java.util.*;
 import java.util.function.Function;
 
 /**
- * Service responsible for JWT token generation, validation, and processing.
- * Handles both access and refresh tokens with separate signing keys and expiration times.
+ * Service responsible for JWT (JSON Web Token) generation, validation, and processing.
+ * This service handles the complete JWT lifecycle including:
+ * - Token generation (both access and refresh tokens)
+ * - Token validation and verification
+ * - Token parsing and claims extraction
+ * - Key management for signing and verification
+ * 
+ * <p>Uses separate signing keys and expiration times for access and refresh tokens
+ * for enhanced security. The service is designed to be stateless and thread-safe.
+ * 
+ * @see io.jsonwebtoken.Jwts JWT Builder and Parser
+ * @see io.jsonwebtoken.Claims JWT Claims
+ * @see org.springframework.security.core.Authentication Spring Security Authentication
  */
 @Service
 @Slf4j

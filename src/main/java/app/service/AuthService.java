@@ -23,6 +23,23 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+/**
+ * Service responsible for handling authentication-related operations including user registration,
+ * login, and token refresh. This service acts as the core business logic layer for authentication
+ * and works in conjunction with Spring Security.
+ *
+ * <p>Key responsibilities include:
+ * <ul>
+ *   <li>User registration with proper validation and role assignment</li>
+ *   <li>User authentication using Spring Security's AuthenticationManager</li>
+ *   <li>JWT token generation and refresh token handling</li>
+ *   <li>User details management and validation</li>
+ * </ul>
+ *
+ * @see org.springframework.security.authentication.AuthenticationManager
+ * @see JwtService
+ * @see UserDetailsService
+ */
 @Slf4j
 @Service
 @AllArgsConstructor
@@ -34,6 +51,15 @@ public class AuthService {
     private final UserDetailsService userDetailsService;
 
 
+    /**
+     * Registers a new user with the provided registration details.
+     * Validates the uniqueness of the username and encodes the password before storage.
+     *
+     * @param request The registration request containing user details
+     * @return The newly created and persisted User entity
+     * @throws RuntimeException If the username is already taken
+     * @throws IllegalArgumentException If the request is invalid
+     */
     @Transactional
     public User register(RegisterRequest request) {
         log.info("Registering new user with username: {}", request.getUsername());
@@ -55,6 +81,14 @@ public class AuthService {
         return savedUser;
     }
 
+    /**
+     * Authenticates a user and generates JWT tokens upon successful authentication.
+     *
+     * @param loginRequest The login request containing username and password
+     * @return TokenPair containing both access and refresh tokens
+     * @throws BadCredentialsException If authentication fails due to invalid credentials
+     * @throws AuthenticationException For other authentication failures
+     */
     public TokenPair login(LoginRequest loginRequest) {
         log.info("Attempting to authenticate user: '{}'", loginRequest.getUsername());
 
@@ -74,6 +108,15 @@ public class AuthService {
         }
     }
 
+    /**
+     * Refreshes an access token using a valid refresh token.
+     * Validates the refresh token and issues a new token pair if valid.
+     *
+     * @param request The refresh token request containing the refresh token
+     * @return New TokenPair with fresh access and refresh tokens
+     * @throws IllegalArgumentException If the refresh token is invalid or expired
+     * @throws UsernameNotFoundException If the user associated with the token is not found
+     */
     public TokenPair refreshToken(@Valid RefreshTokenRequest request) {
 
         String token = request.getRefreshToken();
@@ -100,6 +143,7 @@ public class AuthService {
         }
         log.info("Refreshing token for user: '{}'", username);
 
+        //Creates a new authentication token
         UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                 user, null
                 , user.getAuthorities()
