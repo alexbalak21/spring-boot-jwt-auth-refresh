@@ -3,6 +3,8 @@ package app.service;
 import app.model.User;
 import app.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,6 +23,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CustomUserDetailsService implements UserDetailsService {
 
+    private static final Logger log = LoggerFactory.getLogger(CustomUserDetailsService.class);
+
     // Injects the UserRepository to access user data from the database
     private final UserRepository userRepository;
 
@@ -34,10 +38,17 @@ public class CustomUserDetailsService implements UserDetailsService {
      */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        log.info("Attempting to load user by username: {}", username);
+        
         // Look up user in the database
         User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + username));
+                .orElseThrow(() -> {
+                    log.warn("User not found with username: {}", username);
+                    return new UsernameNotFoundException("User not found with username: " + username);
+                });
 
+        log.debug("Found user: {} with role: {}", user.getUsername(), user.getRole());
+        
         // Return a Spring Security UserDetails object with user's credentials and roles
         return new org.springframework.security.core.userdetails.User(
                 user.getUsername(),       // username

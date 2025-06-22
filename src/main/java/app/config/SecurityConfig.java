@@ -1,6 +1,7 @@
 package app.config;
 
 import app.filter.JwtAuthenticationFilter;
+import app.filter.RequestLoggingFilter;
 import app.security.CustomAuthenticationFailureHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -29,6 +30,7 @@ public class SecurityConfig {
     private final UserDetailsService userDetailsService;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final CustomAuthenticationFailureHandler authenticationFailureHandler;
+    private final RequestLoggingFilter requestLoggingFilter;
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
@@ -56,15 +58,13 @@ public class SecurityConfig {
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
 
-                // Configure form login with only failure handler
-                .formLogin(form -> form
-                        .loginProcessingUrl("/api/auth/login")
-                        .failureHandler(authenticationFailureHandler)
-                        .permitAll()
-                )
+                // Disable form login as we're using JWT
+                .formLogin(AbstractHttpConfigurer::disable)
+                .httpBasic(AbstractHttpConfigurer::disable)
 
-                // Add JWT filter before the default authentication filter
+                // Add custom filters
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(requestLoggingFilter, JwtAuthenticationFilter.class)
 
                 // Configure authorization rules
                 .authorizeHttpRequests(auth -> auth

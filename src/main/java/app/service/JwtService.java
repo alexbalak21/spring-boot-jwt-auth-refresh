@@ -27,25 +27,25 @@ public class JwtService {
     /**
      * Secret key for signing access tokens.
      */
-    @Value("${app.jwt.authSecret}")
+    @Value("${app.jwt.auth-secret}")
     private String secretKey;
 
     /**
      * Secret key for signing refresh tokens.
      */
-    @Value("${app.jwt.refreshSecret}")
+    @Value("${app.jwt.refresh-secret}")
     private String refreshSecretKey;
 
     /**
      * Expiration time for access tokens in milliseconds.
      */
-    @Value("${app.jwt.AuthExpiration}")
+    @Value("${app.jwt.auth-expiration}")
     private long expirationTime;
 
     /**
      * Expiration time for refresh tokens in milliseconds.
      */
-    @Value("${app.jwt.refreshExpiration}")
+    @Value("${app.jwt.refresh-expiration}")
     private long refreshExpirationTime;
 
     /**

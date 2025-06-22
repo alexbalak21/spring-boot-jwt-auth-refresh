@@ -2,11 +2,15 @@ package app.dto;
 
 import app.model.Role;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 @Data
 @Builder
@@ -23,11 +27,18 @@ public class RegisterRequest {
     private String username;
 
     @NotBlank(message = "Password is required")
-    @Size(min = 6, message = "Password must be at least 3 characters")
+    @Size(min = 6, message = "Password must be at least 6 characters")
     private String password;
-    private Role role;
+    
+    @NotNull(message = "Role is required")
+    private String role;
 
-
-
-
+    public Role getRole() {
+        try {
+            return Role.valueOf("ROLE_" + role.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Invalid role: " + role + ". Must be one of: " + 
+                Arrays.stream(Role.values()).map(Enum::name).collect(Collectors.joining(", ")));
+        }
+    }
 }
