@@ -54,7 +54,7 @@ Content-Type: application/json
 
 ###POST PRODUCT
 POST http://localhost:8080/api/products
-Authorization: {{access_token}}
+Authorization: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJqdGkiOiIwZjA3NzhiOS01YzY2LTQ4NTUtYjBmOC1jZDdkNmI0ODcyYTgiLCJzdWIiOiJhbGV4IiwidG9rZW5UeXBlIjoiYWNjZXNzVG9rZW4iLCJpYXQiOjE3NTA1ODY0NzgsImV4cCI6MTc1MDY3Mjg3OH0.w5cyketFm5-8-dy8Y8AeT1KuRnR1uY_Annb1SKsuP9UoPtWafUkskJdzdQaBGoCzNqCfRtLyseU71-58BMEcjA
 Content-Type: application/json
 
 {
