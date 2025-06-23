@@ -19,7 +19,7 @@ public interface RefreshTokenBlacklistRepository extends JpaRepository<RefreshTo
     
     @Modifying
     @Query("DELETE FROM RefreshTokenBlacklist t WHERE t.expiresAt < :now")
-    void deleteExpiredTokens(@Param("now") Instant now);
+    int deleteExpiredTokens(@Param("now") Instant now);
     
     @Modifying
     @Query("DELETE FROM RefreshTokenBlacklist t WHERE t.username = :username")

@@ -1,4 +1,3 @@
-
 ###REGISTER USER
 POST http://localhost:8080/api/auth/register
 Content-Type: application/json
@@ -23,14 +22,14 @@ Content-Type: application/json
 }
 
 > {%
-    client.global.set("access_token", response.body.accessToken);
+    client.global.set("access_token", response.body.accessToken.substring(7));
     client.global.set("refresh_token", response.body.refreshToken.substring(7));
 
 %}
 
 ###POST PRODUCT
 POST http://localhost:8080/api/products
-Authorization: {{access_token}}
+Authorization: Bearer {{access_token}}
 Content-Type: application/json
 
 {
@@ -41,7 +40,7 @@ Content-Type: application/json
 
 ###GET PRODUCT BY ID
 GET http://localhost:8080/api/products/1
-Authorization: {{access_token}}
+Authorization: Bearer {{access_token}}
 Content-Type: application/json
 
 {}
@@ -50,7 +49,7 @@ Content-Type: application/json
 
 ###POST PRODUCT
 POST http://localhost:8080/api/products
-Authorization: {{access_token}}
+Authorization: Bearer {{access_token}}
 Content-Type: application/json
 
 {
@@ -61,7 +60,7 @@ Content-Type: application/json
 
 ###UPDATE PRODUCT
 PUT http://localhost:8080/api/products/1
-Authorization: {{access_token}}
+Authorization: Bearer {{access_token}}
 Content-Type: application/json
 
 {
@@ -71,7 +70,7 @@ Content-Type: application/json
 
 ###UPDATE PRODUCT
 PUT http://localhost:8080/api/products/2
-Authorization: {{access_token}}
+Authorization: Bearer {{access_token}}
 Content-Type: application/json
 
 {
@@ -82,21 +81,93 @@ Content-Type: application/json
 
 ###GET ALL PRODUCTS
 GET http://localhost:8080/api/products
-Authorization: {{access_token}}
+Authorization: Bearer {{access_token}}
 Content-Type: application/json
 
 {}
 
 ###DELETE PRODUCT
 DELETE http://localhost:8080/api/products/1
-Authorization: {{access_token}}
+Authorization: Bearer {{access_token}}
 Content-Type: application/json
 
 
-###REFRESH TOKEN
+### ----------------------------
+### AUTHENTICATION ENDPOINTS
+### ----------------------------
+
+### 1. Refresh Access Token
 POST http://localhost:8080/api/auth/refresh
 Content-Type: application/json
 
 {
   "refreshToken": "{{refresh_token}}"
 }
+
+### 2. Logout
+POST http://localhost:8080/api/auth/logout
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+
+{
+  "refreshToken": "{{refresh_token}}"
+}
+
+
+
+### 3. DEBUG: Blacklist Refresh Token
+POST http://localhost:8080/api/auth/debug/blacklist-refresh-token?refreshToken={{refresh_token}}
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+
+{}
+
+### VALIDATE REFRESH TOKEN
+POST http://localhost:8080/api/auth/validate-refresh
+Content-Type: application/json
+
+{
+  "refreshToken": "{{refresh_token}}"
+}
+
+
+
+
+### ----------------------------
+### PRODUCT ENDPOINTS
+### ----------------------------
+
+### 1. Get All Products
+GET http://localhost:8080/api/products
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+
+### 2. Get Product by ID
+GET http://localhost:8080/api/products/1
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+
+### 3. Create Product
+POST http://localhost:8080/api/products
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+
+{
+  "name": "New Product",
+  "price": "99.99"
+}
+
+### 4. Update Product
+PUT http://localhost:8080/api/products/1
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+
+{
+  "name": "Updated Product",
+  "price": "149.99"
+}
+
+### 5. Delete Product
+DELETE http://localhost:8080/api/products/1
+Authorization: Bearer {{access_token}}
+Content-Type: application/json

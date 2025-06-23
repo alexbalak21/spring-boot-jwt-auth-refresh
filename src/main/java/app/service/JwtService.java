@@ -200,32 +200,56 @@ public class JwtService {
      * @return An Optional containing the claims if successful, empty otherwise
      */
     public Optional<Claims> extractClaims(String token, boolean isRefreshToken) {
-        try {
-            SecretKey key = isRefreshToken ? getRefreshSigningKey() : getAccessSigningKey();
-            Claims claims = Jwts.parser().verifyWith(key).build()
-                    .parseSignedClaims(token).getPayload();
+        if (token == null || token.trim().isEmpty()) {
+            log.warn("Token is null or empty");
+            return Optional.empty();
+        }
 
+        try {
+            log.debug("Starting token validation. Is refresh token: {}", isRefreshToken);
+            log.trace("Token content: {}", token);
+            
+            // Get the appropriate signing key
+            SecretKey key = isRefreshToken ? getRefreshSigningKey() : getAccessSigningKey();
+            log.debug("Using {} key for validation", isRefreshToken ? "refresh" : "access");
+            
+            // Parse and verify the token
+            Claims claims = Jwts.parser()
+                .verifyWith(key)
+                .build()
+                .parseSignedClaims(token)
+                .getPayload();
+
+            // Verify token type claim
             String expectedType = isRefreshToken ? "refreshToken" : "accessToken";
             String actualType = claims.get("tokenType", String.class);
+            
+            log.debug("Token claims - Subject: {}, Type: {}, Issued: {}, Expires: {}", 
+                claims.getSubject(), 
+                actualType,
+                claims.getIssuedAt(),
+                claims.getExpiration());
 
             if (!expectedType.equals(actualType)) {
                 log.warn("Token type mismatch: expected '{}', found '{}'", expectedType, actualType);
                 return Optional.empty();
             }
 
-            log.debug("Extracted claims successfully: subject='{}', type='{}'", claims.getSubject(), actualType);
+            log.debug("Token validation successful for subject: '{}'", claims.getSubject());
             return Optional.of(claims);
 
         } catch (ExpiredJwtException e) {
-            log.warn("Token expired: {}", e.getMessage());
+            log.warn("Token expired at {}. Current time: {}", e.getClaims().getExpiration(), new Date());
         } catch (SignatureException e) {
-            log.warn("Invalid signature: {}", e.getMessage());
+            log.warn("Invalid signature. Error: {}", e.getMessage());
+            log.debug("Token: {}", token);
         } catch (MalformedJwtException e) {
             log.warn("Malformed token: {}", e.getMessage());
+            log.debug("Token: {}", token);
         } catch (UnsupportedJwtException e) {
             log.warn("Unsupported token: {}", e.getMessage());
         } catch (IllegalArgumentException e) {
-            log.warn("Empty claims string: {}", e.getMessage());
+            log.warn("Invalid token argument: {}", e.getMessage());
         } catch (Exception e) {
             log.error("Unexpected exception during claim extraction: {}", e.getMessage(), e);
         }
@@ -293,4 +317,46 @@ public class JwtService {
         return extractClaims(token).map(Claims::getExpiration);
     }
 
+    public String extractUsername(String token) {
+        return extractClaims(token).map(Claims::getSubject).orElse(null);
+    }
+
+    public String extractJti(String accessToken) {
+        return extractClaims(accessToken).map(Claims::getId).orElse(null);
+    }
+
+    /**
+     * Extracts the JWT ID (jti) directly from the token string without validation.
+     * This is useful when the token might be expired or the signature doesn't match.
+     *
+     * @param token The JWT token string
+     * @return An Optional containing the JWT ID if found, empty otherwise
+     */
+    public Optional<String> extractTokenIdFromString(String token) {
+        if (token == null || token.trim().isEmpty()) {
+            return Optional.empty();
+        }
+        try {
+            // Split the token into parts
+            String[] parts = token.split("\\.");
+            if (parts.length != 3) {
+                return Optional.empty();
+            }
+            
+            // Decode the payload (second part)
+            String payload = new String(java.util.Base64.getUrlDecoder().decode(parts[1]));
+            
+            // Parse the JSON payload to get the jti
+            com.fasterxml.jackson.databind.JsonNode jsonNode = new com.fasterxml.jackson.databind.ObjectMapper()
+                .readTree(payload);
+                
+            if (jsonNode.has("jti")) {
+                return Optional.of(jsonNode.get("jti").asText());
+            }
+            return Optional.empty();
+        } catch (Exception e) {
+            log.warn("Failed to extract token ID from token string: {}", e.getMessage());
+            return Optional.empty();
+        }
+    }
 }

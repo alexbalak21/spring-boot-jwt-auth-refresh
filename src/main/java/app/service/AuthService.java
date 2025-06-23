@@ -9,7 +9,7 @@ import app.model.User;
 import app.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -21,6 +21,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
+import java.util.Date;
 import java.util.Optional;
 
 /**
@@ -42,13 +44,15 @@ import java.util.Optional;
  */
 @Slf4j
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class AuthService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
     private final UserDetailsService userDetailsService;
+    private final AuthTokenBlackListService authTokenBlackListService;
+    private final RefreshTokenBlacklistService refreshTokenBlacklistService;
 
 
     /**
@@ -117,8 +121,7 @@ public class AuthService {
      * @throws IllegalArgumentException If the refresh token is invalid or expired
      * @throws UsernameNotFoundException If the user associated with the token is not found
      */
-    public TokenPair refreshToken(@Valid RefreshTokenRequest request) {
-
+    public TokenPair refreshTokens(@Valid RefreshTokenRequest request) {
         String token = request.getRefreshToken();
         if (token == null || token.isBlank()) {
             throw new IllegalArgumentException("Refresh token is required");
@@ -149,5 +152,69 @@ public class AuthService {
                 , user.getAuthorities()
         );
         return jwtService.generateTokenPair(authentication);
+    }
+
+    /**
+     * Logs out the current user by blacklisting the current access token and refresh token.
+     * This effectively invalidates both tokens, requiring the user to log in again.
+     *
+     * @param accessToken The current access token to blacklist
+     * @param refreshToken The current refresh token to blacklist
+     * @throws IllegalArgumentException If either token is invalid or expired
+     */
+
+    //NEED TO SEE WHY THIS IS NOT WORKING
+    //AUTHTOKEN GETTING BLACKLISTED BUT REFRESHTOKEN IS NOT
+    @Transactional
+    public void logout(String accessToken, String refreshToken) {
+        if (accessToken == null || accessToken.isBlank()) {
+            log.warn("Access token is required for logout");
+            throw new IllegalArgumentException("Access token is required");
+        }
+
+        // Extract username and expiration from access token
+        String username = jwtService.extractUsername(accessToken);
+        if (username == null) {
+            log.warn("Invalid access token: no username found");
+            throw new IllegalArgumentException("Invalid access token");
+        }
+
+        // Extract JTI from tokens
+        String accessTokenId = jwtService.extractJti(accessToken);
+        String refreshTokenId = refreshToken != null ? jwtService.extractJti(refreshToken) : null;
+        
+        if (accessTokenId == null) {
+            log.warn("Invalid access token: no JTI found");
+            throw new IllegalArgumentException("Invalid access token");
+        }
+
+        // Get token expiration and convert to Instant
+        Instant accessTokenExpiry = jwtService.extractExpiration(accessToken)
+            .map(Date::toInstant)
+            .orElseGet(() -> Instant.now().plusSeconds(3600)); // Default to 1 hour if not found
+
+        // Blacklist the access token
+        authTokenBlackListService.blacklistToken(
+            accessTokenId,
+            username,
+            accessTokenExpiry
+        );
+        
+        log.info("Access token blacklisted for user: {}", username);
+
+        // Blacklist the refresh token if provided
+        if (refreshTokenId != null) {
+            // Refresh tokens typically have a longer expiration
+            Instant refreshTokenExpiry = accessTokenExpiry.plusSeconds(7 * 24 * 3600); // 7 days after access token
+            refreshTokenBlacklistService.blacklistToken(
+                refreshTokenId,
+                username,
+                refreshTokenExpiry
+            );
+            log.info("Refresh token blacklisted for user: {}", username);
+        }
+        
+        // Clear the security context
+        SecurityContextHolder.clearContext();
     }
 }

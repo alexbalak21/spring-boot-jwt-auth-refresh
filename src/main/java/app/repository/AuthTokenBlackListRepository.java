@@ -19,7 +19,7 @@ public interface AuthTokenBlackListRepository extends JpaRepository<AuthTokenBla
     
     @Modifying
     @Query("DELETE FROM AuthTokenBlackList t WHERE t.expiresAt < :now")
-    void deleteExpiredTokens(@Param("now") Instant now);
+    int deleteExpiredTokens(@Param("now") Instant now);
     
     @Modifying
     @Query("DELETE FROM AuthTokenBlackList t WHERE t.username = :username")
