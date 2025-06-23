@@ -167,6 +167,8 @@ public class AuthController {
         }
     }
 
+
+    //DEBUG ENDPOINT
     @PostMapping("/validate-refresh")
     public ResponseEntity<?> validateRefreshToken(@Valid @RequestBody RefreshTokenRequest request) {
         try {
