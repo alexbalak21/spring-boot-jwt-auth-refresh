@@ -28,4 +28,5 @@ public interface RefreshTokenBlacklistRepository extends JpaRepository<RefreshTo
     @Modifying
     @Query("DELETE FROM RefreshTokenBlacklist t WHERE t.username = :username AND t.tokenId = :tokenId")
     void deleteByUsernameAndTokenId(@Param("username") String username, @Param("tokenId") String tokenId);
+
 }

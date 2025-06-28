@@ -194,7 +194,7 @@ public class JwtService {
     public boolean isTokenValid(String token, boolean isRefreshToken) {
         String jti = extractTokenId(token, true).orElse(null);
         //NEED TO ADD THE CHECK FOR BLACKLIST REFRESH TOKEN
-        if (blacklisted) return false;
+        if (refreshTokenBlacklistRepository.existsByTokenId(jti)) return false;
         boolean valid = extractClaims(token, isRefreshToken).isPresent();
         log.debug("Token validity check ({}): {}", isRefreshToken ? "refresh" : "access", valid);
         return valid;

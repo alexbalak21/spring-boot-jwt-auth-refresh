@@ -97,6 +97,14 @@ Content-Type: application/json
 
 {}
 
+
+###GET ALL PRODUCTS OUTDATED TOKEN
+GET http://localhost:8080/api/products
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJiYTRhYTJjMS1hM2U1LTRlNGMtODdmNC1kMTc0OWU2OTUxNDQiLCJzdWIiOiJhbGV4IiwidG9rZW5UeXBlIjoiYWNjZXNzVG9rZW4iLCJpYXQiOjE3NTExMzk3NjYsImV4cCI6MTc1MTE0MzM2Nn0.CG-UugHsl50JHTbCp0f9QmfH6tXMWtXnQdp6oW99XMNqM8UAL2zZbhS-vzHh6j-0DNM219iwr18MygAEEmtYYA
+Content-Type: application/json
+
+{}
+
 ###DELETE PRODUCT
 DELETE http://localhost:8080/api/products/1
 Authorization: Bearer {{access_token}}
