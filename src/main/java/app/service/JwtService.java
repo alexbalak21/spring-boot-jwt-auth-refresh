@@ -192,6 +192,9 @@ public class JwtService {
      * @return true if the token is valid, false otherwise
      */
     public boolean isTokenValid(String token, boolean isRefreshToken) {
+        String jti = extractTokenId(token, true).orElse(null);
+        //NEED TO ADD THE CHECK FOR BLACKLIST REFRESH TOKEN
+        if (blacklisted) return false;
         boolean valid = extractClaims(token, isRefreshToken).isPresent();
         log.debug("Token validity check ({}): {}", isRefreshToken ? "refresh" : "access", valid);
         return valid;
@@ -322,6 +325,11 @@ public class JwtService {
     public Optional<String> extractTokenId(String token) {
         return extractClaims(token).map(Claims::getId);
     }
+
+    public Optional<String> extractTokenId (String refreshToken, boolean isRefreshToken){
+        return extractClaims(refreshToken, isRefreshToken).map(Claims::getId);
+    }
+
 
     /**
      * Extracts the expiration date from a JWT token.
