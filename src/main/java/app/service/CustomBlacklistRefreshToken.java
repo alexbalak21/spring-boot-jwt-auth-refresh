@@ -3,23 +3,26 @@ package app.service;
 import app.model.RefreshTokenBlacklist;
 import app.repository.RefreshTokenBlacklistRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 import java.util.Date;
 import java.util.Objects;
 
 @Slf4j
+@Service
 public class CustomBlacklistRefreshToken {
     private final RefreshTokenBlacklistRepository refreshTokenBlacklistRepository;
     private final JwtService jwtService;
 
 
-    public CustomBlacklistRefreshToken(RefreshTokenBlacklistRepository refreshTokenBlacklistRepository, JwtService jwtService, RefreshTokenBlacklist refreshTokenBlacklist) {
+    public CustomBlacklistRefreshToken(RefreshTokenBlacklistRepository refreshTokenBlacklistRepository, JwtService jwtService) {
         this.refreshTokenBlacklistRepository = refreshTokenBlacklistRepository;
         this.jwtService = jwtService;
     }
 
-    void blacklistRefreshToken(String refreshToken) {
+
+    void blackListToken(String refreshToken) {
         log.debug("Attempting to blacklist refresh token");
         try {
             String tokenId = jwtService.extractJti(refreshToken);
@@ -37,7 +40,7 @@ public class CustomBlacklistRefreshToken {
     }
 
     boolean isTokenBlacklisted(String tokenId){
-        return Objects.nonNull(this.refreshTokenBlacklistRepository.findByTokenId(tokenId).orElse(null));
+        return refreshTokenBlacklistRepository.existsByTokenId(tokenId);
     }
 
     void cleanupExpiredTokens(){

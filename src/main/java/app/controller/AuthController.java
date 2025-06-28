@@ -134,7 +134,7 @@ public class AuthController {
                 // For expired/invalid tokens, we might not be able to get all claims
                 // You might want to get this info from your database or another source
                 username = "unknown";
-                expiration = new Date(System.currentTimeMillis() + 3600000); // Default to 1 hour
+                expiration = jwtService.extractExpiration(refreshToken).orElse(new Date(System.currentTimeMillis() + 3600000)); // Default to 1 hour
                 log.debug("Extracted token ID from raw token - ID: {}", tokenId);
             }
             
