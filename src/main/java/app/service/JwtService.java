@@ -1,6 +1,8 @@
 package app.service;
 
 import app.dto.TokenPair;
+import app.repository.AuthTokenBlackListRepository;
+import app.repository.RefreshTokenBlacklistRepository;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -63,6 +65,14 @@ public class JwtService {
      */
     private static final String TOKEN_PREFIX = "Bearer ";
 
+    private final AuthTokenBlackListRepository tokenBlackListRepository;
+    private final RefreshTokenBlacklistRepository refreshTokenBlacklistRepository;
+
+    public JwtService(AuthTokenBlackListRepository tokenBlackListRepository, RefreshTokenBlacklistRepository refreshTokenBlacklistRepository) {
+        this.tokenBlackListRepository = tokenBlackListRepository;
+        this.refreshTokenBlacklistRepository = refreshTokenBlacklistRepository;
+    }
+
 
     /**
      * Generates a new JWT access token for the authenticated user.
@@ -120,6 +130,12 @@ public class JwtService {
      * @return true if the token is valid for the user, false otherwise
      */
     public boolean validateToken(String token, UserDetails userDetails) {
+        //IF TOKEN IN BLACKLIST, RETURN FALSE
+        String jti = extractTokenId(token).orElse(null);
+        if (tokenBlackListRepository.existsByJti(jti)) {
+            log.debug("Token '{}' is in the blacklist.", token);
+            return false;
+        }
         try {
             Optional<String> extractedUsername = usernameFromToken(token);
             if (extractedUsername.isPresent()) {
@@ -316,13 +332,24 @@ public class JwtService {
     public Optional<Date> extractExpiration(String token) {
         return extractClaims(token).map(Claims::getExpiration);
     }
+    public Optional<Date> extractExpiration(String token, boolean isRefreshToken) {
+        return extractClaims(token, isRefreshToken).map(Claims::getExpiration);
+    }
 
     public String extractUsername(String token) {
         return extractClaims(token).map(Claims::getSubject).orElse(null);
     }
 
+    public String extractUsername (String refreshToken, boolean isRefreshToken) {
+        return extractClaims(refreshToken, isRefreshToken).map(Claims::getSubject).orElse(null);
+    }
+
     public String extractJti(String accessToken) {
         return extractClaims(accessToken).map(Claims::getId).orElse(null);
+    }
+
+    public String extractJti(String refreshToken, boolean isRefreshToken) {
+        return extractClaims(refreshToken, isRefreshToken).map(Claims::getId).orElse(null);
     }
 
     /**

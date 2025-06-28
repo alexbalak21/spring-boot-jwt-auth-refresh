@@ -27,6 +27,17 @@ Content-Type: application/json
 
 %}
 
+
+### LOGOUT
+POST http://localhost:8080/api/auth/logout
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+
+{
+  "refreshToken": "{{refresh_token}}"
+}
+
+
 ###POST PRODUCT
 POST http://localhost:8080/api/products
 Authorization: Bearer {{access_token}}
@@ -104,14 +115,6 @@ Content-Type: application/json
   "refreshToken": "{{refresh_token}}"
 }
 
-### 2. Logout
-POST http://localhost:8080/api/auth/logout
-Authorization: Bearer {{access_token}}
-Content-Type: application/json
-
-{
-  "refreshToken": "{{refresh_token}}"
-}
 
 
 ### 3. DEBUG: Blacklist Access Token
@@ -127,7 +130,7 @@ POST http://localhost:8080/api/auth/refresh-blacklist
 Content-Type: application/json
 
 {
-  "refreshToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJqdGkiOiI2MWZlNmI4Ni02ODg1LTQzODYtOTk4YS1kMzA2ZDY0OTNkZWMiLCJzdWIiOiJhbGV4IiwidG9rZW5UeXBlIjoicmVmcmVzaFRva2VuIiwiaWF0IjoxNzUxMTI3OTA4LCJleHAiOjE3NTE3MzI3MDh9.ZyHgJW9VSPQw2kRWkTideyVFzl1pfPpGCAYtNTCa3Q1bggh94aMuyXAbuCZ7HCv7J3UZnGuU9jkB_t4upq4YGg"
+  "refreshToken": "{{refresh_token}}"
 }
 
 
@@ -136,6 +139,13 @@ Content-Type: application/json
 ### 3. DEBUG: Blacklist Refresh Token
 POST http://localhost:8080/api/auth/debug/blacklist-refresh-token?refreshToken={{refresh_token}}
 Authorization: Bearer {{access_token}}
+Content-Type: application/json
+
+{}
+
+
+### 3. DEBUG: Blacklist Refresh Token Request
+POST http://localhost:8080/api/auth/refresh-blacklist-req?refreshToken={{refresh_token}}
 Content-Type: application/json
 
 {}

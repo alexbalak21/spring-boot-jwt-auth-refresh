@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.Map;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Slf4j
@@ -204,6 +203,17 @@ public class AuthController {
     @PostMapping("/refresh-blacklist")
     public ResponseEntity<?> refreshBlacklist(@Valid @RequestBody RefreshTokenRequest request) {
         String refreshToken = request.getRefreshToken();
+        if (refreshToken == null) {
+            return ResponseEntity.badRequest().body(Map.of("status", "error", "message", "Refresh token is required"));
+        }
+
+        customBlacklistRefreshToken.blackListToken(refreshToken);
+        return ResponseEntity.ok(Map.of("status", "success", "message", "Refresh token blacklisted"));
+    }
+
+    @PostMapping("/refresh-blacklist-req")
+    public ResponseEntity<?> refreshBlacklistReq(@Valid @RequestParam String refreshToken) {
+
         if (refreshToken == null) {
             return ResponseEntity.badRequest().body(Map.of("status", "error", "message", "Refresh token is required"));
         }

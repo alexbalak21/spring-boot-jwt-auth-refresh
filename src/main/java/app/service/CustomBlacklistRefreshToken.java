@@ -25,9 +25,9 @@ public class CustomBlacklistRefreshToken {
      public void blackListToken(String refreshToken) {
         log.debug("Attempting to blacklist refresh token");
         try {
-            String tokenId = jwtService.extractJti(refreshToken);
-            String username = jwtService.extractUsername(refreshToken);
-            Date expiration = jwtService.extractExpiration(refreshToken).orElse(null);
+            String tokenId = jwtService.extractJti(refreshToken,true);
+            String username = jwtService.extractUsername(refreshToken, true);
+            Date expiration = jwtService.extractExpiration(refreshToken, true).orElse(null);
             log.info("Blacklisting refresh token for user: {}, token ID: {}, expires at: {}", username, tokenId, expiration);
             if (expiration == null) return;
             RefreshTokenBlacklist refreshTokenBlacklist = new RefreshTokenBlacklist(tokenId, username, expiration.toInstant());
