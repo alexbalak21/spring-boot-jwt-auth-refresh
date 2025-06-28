@@ -36,7 +36,6 @@ public class RequestLoggingFilter extends OncePerRequestFilter {
                 byte[] buf = wrappedRequest.getContentAsByteArray();
                 if (buf.length > 0) {
                     String payload = new String(buf, 0, buf.length, wrappedRequest.getCharacterEncoding());
-                    log.info("Request payload: {}", payload);
                 }
             }
         } else {
