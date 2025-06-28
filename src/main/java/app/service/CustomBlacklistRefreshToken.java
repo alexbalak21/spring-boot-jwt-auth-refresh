@@ -22,7 +22,7 @@ public class CustomBlacklistRefreshToken {
     }
 
 
-    void blackListToken(String refreshToken) {
+     public void blackListToken(String refreshToken) {
         log.debug("Attempting to blacklist refresh token");
         try {
             String tokenId = jwtService.extractJti(refreshToken);

@@ -3,6 +3,7 @@ package app.controller;
 import app.dto.*;
 import app.model.User;
 import app.service.AuthService;
+import app.service.CustomBlacklistRefreshToken;
 import app.service.JwtService;
 import app.service.RefreshTokenBlacklistService;
 import io.jsonwebtoken.Claims;
@@ -29,6 +30,7 @@ public class AuthController {
     private final AuthService authService;
     private final JwtService jwtService;
     private final RefreshTokenBlacklistService refreshTokenBlacklistService;
+    private final CustomBlacklistRefreshToken customBlacklistRefreshToken;
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@Valid @RequestBody RegisterRequest request) {
@@ -197,6 +199,17 @@ public class AuthController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(Map.of("valid", false, "error", "Error validating token"));
         }
+    }
+
+    @PostMapping("/refresh-blacklist")
+    public ResponseEntity<?> refreshBlacklist(@Valid @RequestBody RefreshTokenRequest request) {
+        String refreshToken = request.getRefreshToken();
+        if (refreshToken == null) {
+            return ResponseEntity.badRequest().body(Map.of("status", "error", "message", "Refresh token is required"));
+        }
+
+        customBlacklistRefreshToken.blackListToken(refreshToken);
+        return ResponseEntity.ok(Map.of("status", "success", "message", "Refresh token blacklisted"));
     }
 
 }
