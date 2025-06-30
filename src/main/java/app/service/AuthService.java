@@ -74,7 +74,7 @@ public class AuthService {
         User user = new User();
         user.setUsername(request.getUsername());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
-        user.setFullName(request.getFullName());
+        user.setEmail(request.getEmail());
         user.setRole(request.getRole()); // This will now call getRole() which does the conversion
 
         User savedUser = userRepository.save(user);

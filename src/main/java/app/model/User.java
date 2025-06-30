@@ -29,10 +29,10 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Name is required")
-    @Size(min = 3, max = 50, message = "Full name must be between 3 and 50 characters")
-    @Column(name = "full_name", nullable = false)
-    private String fullName;
+    @NotBlank(message = "Email is required")
+    @Size(max = 100, message = "Email must be at most 100 characters")
+    @Column(name = "email", nullable = false, unique = true)
+    private String email;
 
     @NotBlank(message = "Username is required")
     @Size(min = 3, max = 50, message = "Username must be between 3 and 50 characters")
@@ -81,11 +81,19 @@ public class User implements UserDetails {
         return true;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", fullName='" + fullName + '\'' +
+                ", email='" + email + '\'' +
                 ", username='" + username + '\'' +
                 ", role=" + role +
                 ", createdAt=" + createdAt +

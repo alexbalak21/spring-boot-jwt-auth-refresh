@@ -18,9 +18,9 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class RegisterRequest {
 
-    @NotBlank(message = "Name is required")
-    @Size(min = 3, max = 50, message = "Full name must be between 3 and 50 characters")
-    private String fullName;
+    @NotBlank(message = "Email is required")
+    @Size(max = 100, message = "Email must be at most 100 characters")
+    private String email;
 
     @NotBlank(message = "Username is required")
     @Size(min = 3, max = 50, message = "Username must be between 3 and 50 characters")
